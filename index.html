@@ -7,6 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="50·60, 지금이 AI로 다시 일할 가장 빠른 때입니다. AI강사 데뷔부터 쇼핑쇼츠 수익화, 1:1 맞춤 컨설팅까지 드림랩이 함께합니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="한국AI활용지도사교육연구협회 · 드림랩">
+<meta property="og:title" content="한국AI활용지도사교육연구협회">
+<meta property="og:description" content="50·60, 지금이 AI로 다시 일할 가장 빠른 때입니다. AI강사 데뷔부터 쇼핑쇼츠 수익화, 1:1 맞춤 컨설팅까지 드림랩이 함께합니다.">
+<meta property="og:url" content="https://dreamlabai.org/">
+<meta property="og:image" content="https://dreamlabai.org/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -262,6 +272,10 @@
   .reel-dots i.on { width: 22px; background: var(--marker); }
   .reel-yt { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,.55); color: #fff; font-size: .74rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; text-decoration: none; }
   .reel-yt:hover { background: #e62117; }
+  .reel-snd { position: absolute; top: 12px; left: 12px; z-index: 2; border: 0; cursor: pointer; font: inherit; font-size: .8rem; font-weight: 800; padding: 8px 14px; border-radius: 999px; background: var(--marker); color: var(--brand-deep); box-shadow: 0 6px 14px rgba(0,0,0,.3); animation: sndPulse 2s ease-in-out infinite; }
+  .reel-snd[aria-pressed="true"] { background: rgba(0,0,0,.55); color: #fff; animation: none; }
+  @keyframes sndPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  @media (prefers-reduced-motion: reduce) { .reel-snd { animation: none; } }
 </style>
 </head>
 <body>
@@ -463,6 +477,7 @@
         <figure class="reel reveal" aria-label="드림랩 소개 영상">
           <video id="reel-v" muted playsinline autoplay preload="metadata" poster="video/intro-1.jpg" src="video/intro-1.mp4"></video>
           <figcaption><span class="reel-tag">▶ DREAMLAB</span><span class="reel-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></figcaption>
+          <button type="button" class="reel-snd" id="reel-snd" aria-pressed="false">🔇 소리 켜기</button>
           <a class="reel-yt" href="https://www.youtube.com/@%EB%93%9C%EB%A6%BC%EB%9E%A9" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>
         </figure>
         <div class="section-head reveal"><p class="eyebrow">협회 개요</p><h2>한눈에 보는 협회</h2></div>
@@ -563,12 +578,15 @@
   var v = document.getElementById("reel-v"); if (!v) return;
   var list = ["video/intro-1.mp4", "video/intro-2.mp4", "video/intro-3.mp4", "video/intro-4.mp4"], i = 0;
   var dots = document.querySelectorAll(".reel-dots i");
-  function play() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function play() { var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; setBtn(); v.play(); }); }
+  var snd = document.getElementById("reel-snd");
+  function setBtn() { if (!snd) return; snd.setAttribute("aria-pressed", v.muted ? "false" : "true"); snd.textContent = v.muted ? "🔇 소리 켜기" : "🔊 소리 끄기"; }
+  if (snd) snd.addEventListener("click", function () { v.muted = !v.muted; setBtn(); play(); });
   v.addEventListener("ended", function () {
     v.classList.add("fade");
     setTimeout(function () {
       i = (i + 1) % list.length; dots.forEach(function (d, n) { d.classList.toggle("on", n === i); });
-      v.poster = list[i].replace(".mp4", ".jpg"); v.src = list[i]; v.load(); play(); v.classList.remove("fade");
+      var m = v.muted; v.poster = list[i].replace(".mp4", ".jpg"); v.src = list[i]; v.load(); v.muted = m; play(); v.classList.remove("fade");
     }, 350);
   });
   if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? play() : v.pause(); }); }, { threshold: .25 }).observe(v);
@@ -576,6 +594,6 @@
 })();
 </script>
 
-<script>document.getElementById("free-link").href = window.KAIA_LINKS.freeClass;</script>
+<script>(function(){var a=document.getElementById("free-link");a.href=window.KAIA_LINKS.freeClass;a.target="_blank";a.rel="noopener";})();</script>
 </body>
 </html>

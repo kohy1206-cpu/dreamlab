@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="한국AI활용지도사교육연구협회 · 드림랩">
+<meta property="og:title" content="유튜브 쇼핑쇼츠 크리에이터 부트캠프 · 한국AI활용지도사교육연구협회">
+<meta property="og:description" content="구독자 500명부터 시작하는 유튜브 쇼핑. 4가지 쇼핑쇼츠 유형 중 나에게 맞는 무기를 찾고, 7일 만에 첫 영상을 올리는 크리에이터 부트캠프.">
+<meta property="og:url" content="https://dreamlabai.org/shopping-shorts.html">
+<meta property="og:image" content="https://dreamlabai.org/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -522,7 +531,7 @@
 })();
 
 /* 무료특강 버튼 */
-document.querySelectorAll(".js-free").forEach(function (a) { a.href = window.KAIA_LINKS.freeClass; });
+document.querySelectorAll(".js-free").forEach(function (a) { a.href = window.KAIA_LINKS.freeClass; a.target = "_blank"; a.rel = "noopener"; });
 
 /* 1분 자가 진단 */
 (function () {

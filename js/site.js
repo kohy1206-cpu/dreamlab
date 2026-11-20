@@ -133,6 +133,11 @@
     });
   }
 
+  /* 바깥 사이트로 가는 링크는 새 창으로 (홈페이지 안 이동은 그대로) */
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    if (a.hostname && a.hostname !== location.hostname) { a.target = "_blank"; a.rel = "noopener"; }
+  });
+
   /* 스크롤 모션: .reveal(나타나기), [data-count](숫자 세기), .on-view(보이면 .in 추가) */
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   function countUp(el) {
