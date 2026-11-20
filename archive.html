@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#0f2350">
-<link rel="stylesheet" href="css/site.css?v=20261121">
+<link rel="stylesheet" href="css/site.css?v=20261121d">
 <style>
   .ar-hero { padding: 64px 0 40px; }
   .ar-hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; }
@@ -55,6 +55,9 @@
   .item .thumb { aspect-ratio: 16/9; background: var(--blueprint); position: relative; overflow: hidden; }
   .item .thumb img { width: 100%; height: 100%; object-fit: cover; }
   .item .thumb .play { position: absolute; right: 12px; bottom: 12px; width: 52px; height: 36px; background: #ff2d2d; border-radius: 10px; }
+  .item .thumb[data-yt] { cursor: pointer; }
+  .item .thumb.yt-embed { border-radius: 0; }
+  .item .yt-out { justify-self: start; margin-top: 4px; }
   .item .thumb .play::after { content: ""; position: absolute; left: 20px; top: 10px; border-left: 15px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
   .item .thumb.ph { display: grid; place-items: center; background: linear-gradient(135deg, #e9eef8, #f8eef3); }
   .item .thumb.ph span { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--brand-deep); text-align: center; padding: 0 20px; line-height: 1.5; }
@@ -136,7 +139,7 @@
 
 <footer id="site-foot"></footer>
 <div id="dock"></div>
-<script src="js/site.js?v=20261121c"></script>
+<script src="js/site.js?v=20261121e"></script>
 <script>
 /* ───── 자료 목록: 새 자료는 맨 위에 한 줄씩 추가하면 됩니다 ─────
    type: 영상 | 블로그 | 특강자료   level: 입문 | 실전
@@ -173,8 +176,10 @@ var ITEMS = [
       var cls=i.type==='블로그'?'t-blog':(i.type==='특강자료'?'t-gift':'');
       var bcls=i.type==='영상'?'yt':(i.type==='블로그'?'blog':'gift');
       var src=i.type==='영상'?'유튜브':(i.type==='블로그'?'네이버 블로그':'무료특강 선물');
-      var th=i.thumb?'<div class="thumb"><img src="'+i.thumb+'" alt="" loading="lazy">'+(i.type==='영상'?'<span class="play"></span>':'')+'</div>':'<div class="thumb ph"><span>'+esc(i.ph||i.title).replace(/\n/g,'<br>')+'</span></div>';
-      return '<a class="item '+cls+'" href="'+i.url+'"'+(/^https?:/.test(i.url)?' target="_blank" rel="noopener"':'')+'>'+th+'<div class="body"><div class="meta">'+(i.date?'<time>'+i.date+'</time>':'')+'<span class="badge '+bcls+'">'+src+'</span><span class="badge lv">'+i.level+'</span><span class="badge">'+(LABEL[i.topic]||i.topic)+'</span></div><h3>'+esc(i.title)+'</h3><p>'+esc(i.sub)+'</p><div class="tags">'+i.tags.map(function(t){return '<span>#'+esc(t)+'</span>';}).join('')+'</div></div></a>';
+      var yid=i.type==='영상'?((i.url.match(/(?:youtu\.be\/|v=)([\w-]{11})/)||[])[1]||''):'';
+      var th=i.thumb?'<div class="thumb"'+(yid?' data-yt="'+yid+'" role="button" tabindex="0" aria-label="영상 재생"':'')+'><img src="'+i.thumb+'" alt="" loading="lazy">'+(i.type==='영상'?'<span class="play"></span>':'')+'</div>':'<div class="thumb ph"><span>'+esc(i.ph||i.title).replace(/\n/g,'<br>')+'</span></div>';
+      var open=yid?'<div class="item '+cls+'">':'<a class="item '+cls+'" href="'+i.url+'"'+(/^https?:/.test(i.url)?' target="_blank" rel="noopener"':'')+'>';
+      return open+th+'<div class="body"><div class="meta">'+(i.date?'<time>'+i.date+'</time>':'')+'<span class="badge '+bcls+'">'+src+'</span><span class="badge lv">'+i.level+'</span><span class="badge">'+(LABEL[i.topic]||i.topic)+'</span></div><h3>'+esc(i.title)+'</h3><p>'+esc(i.sub)+'</p><div class="tags">'+i.tags.map(function(t){return '<span>#'+esc(t)+'</span>';}).join('')+'</div>'+(yid?'<a class="yt-out" href="'+i.url+'" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>':'')+'</div>'+(yid?'</div>':'</a>');
     }).join('');
     empty.classList.toggle('show',!list.length);
   }

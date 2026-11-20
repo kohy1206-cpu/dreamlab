@@ -222,6 +222,29 @@
     }, true);
   })();
 
+  /* 유튜브 영상: 썸네일을 누르면 페이지 안에서 바로 재생 ('유튜브에서 보기'는 새 창으로) */
+  (function () {
+    function ytId(u) { var m = String(u || "").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/); return m ? m[1] : ""; }
+    function frame(id) { return '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="유튜브 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'; }
+    /* 썸네일 링크에서 유튜브 주소를 떼어 내고 '재생 상자'로 바꿈 → 어떤 브라우저·미리보기에서도 새 창이 뜨지 않음 */
+    function tameYt() {
+      document.querySelectorAll("a[href]").forEach(function (a) {
+        var id = ytId(a.getAttribute("href")); if (!id || !a.querySelector("img")) return;
+        a.setAttribute("data-yt", id); a.removeAttribute("href"); a.removeAttribute("target"); a.removeAttribute("rel");
+        a.setAttribute("role", "button"); a.setAttribute("tabindex", "0"); a.style.cursor = "pointer";
+      });
+    }
+    tameYt(); document.addEventListener("DOMContentLoaded", tameYt);
+    function playBox(box) { if (box.classList.contains("yt-on")) return; box.classList.add("yt-embed", "yt-on"); box.innerHTML = frame(box.getAttribute("data-yt")); }
+    window.addEventListener("click", function (e) {
+      var box = e.target.closest && e.target.closest("[data-yt]"); if (!box) return;
+      e.preventDefault(); e.stopImmediatePropagation(); playBox(box);
+    }, true);
+    window.addEventListener("keydown", function (e) {
+      if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("[data-yt]")) { e.preventDefault(); playBox(e.target); }
+    }, true);
+  })();
+
   /* 바깥 사이트로 가는 링크는 새 창으로 (홈페이지 안 이동은 그대로) — 나중에 생긴 링크까지 클릭 순간에 한 번 더 확인 */
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
