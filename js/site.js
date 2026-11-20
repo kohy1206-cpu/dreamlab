@@ -140,19 +140,27 @@
        여러 페이지를 둘러보다가 며칠 뒤 신청해도 '마지막으로 누른 짧은 주소'가 기록됩니다. */
     var SRC = { ig: "인스타그램", yt: "유튜브", tt: "틱톡", fb: "페이스북", dg: "당근", blog: "네이버 블로그", kt: "카카오톡 채널", oc: "오픈톡방", live: "실시간 온라인 강의", off: "오프라인 강의", qr: "QR코드" };
     function srcName(v) { return SRC[v] || v; }
+    /* 유입경로 두 가지를 기억합니다(같은 브라우저 기준, 90일)
+       - 처음 유입경로: 우리 사이트를 처음 알게 된 곳 (한 번 정해지면 그대로)
+       - 최근 유입경로: 가장 최근에 누른 짧은 주소 (짧은 주소로 들어올 때마다 새로 기록) */
+    var DAY90 = 90 * 864e5;
+    function load(k) { try { var v = JSON.parse(localStorage.getItem(k) || "null"); return v && Date.now() - v.t <= DAY90 ? v : null; } catch (x) { return null; } }
+    function keep(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (x) {} }
     try {
-      var q = new URLSearchParams(location.search), code = q.get("from") || q.get("utm_source") || "", saved = null;
-      try { saved = JSON.parse(localStorage.getItem("kaia_src") || "null"); } catch (x) {}
-      if (saved && Date.now() - saved.t > 90 * 864e5) saved = null;
+      var q = new URLSearchParams(location.search), code = q.get("from") || q.get("utm_source") || "";
       var ref = "";
       if (!code && document.referrer) { var rh = new URL(document.referrer).hostname.replace(/^www\./, ""); if (rh && rh !== location.hostname.replace(/^www\./, "")) ref = rh; }
-      /* 짧은 주소(?from=)로 들어오면 그 경로로 새로 기록(가장 최근에 누른 링크가 우선). 그냥 들어오면 이전 기록 유지 */
-      if (code) localStorage.setItem("kaia_src", JSON.stringify({ s: srcName(code), t: Date.now() }));
-      else if (!saved && ref) localStorage.setItem("kaia_src", JSON.stringify({ s: ref + " (링크)", t: Date.now() }));
-      else if (!saved) localStorage.setItem("kaia_src", JSON.stringify({ s: "직접 방문", t: Date.now() }));
+      var now = { s: code ? srcName(code) : ref ? ref + " (링크)" : "직접 방문", t: Date.now() };
+      var last = load("kaia_src"), first = load("kaia_first");
+      if (!first) keep("kaia_first", last || now);          /* 예전 방식으로 기억된 경로가 있으면 그게 '처음' */
+      if (code || ref || !last) keep("kaia_src", now);       /* 짧은 주소·다른 사이트 링크로 오면 최근 경로 갱신 */
       if (code && history.replaceState) { q.delete("from"); history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : "") + location.hash); }
     } catch (e) {}
-    function getSrc() { try { var v = JSON.parse(localStorage.getItem("kaia_src") || "null"); if (v) return [v.s, new Date(v.t).toLocaleDateString("ko-KR")]; } catch (e) {} return ["알 수 없음", ""]; }
+    function getSrc() {
+      var f = load("kaia_first"), l = load("kaia_src");
+      return { first: f ? f.s : "알 수 없음", firstDay: f ? new Date(f.t).toLocaleDateString("ko-KR") : "", last: l ? l.s : "알 수 없음" };
+    }
+    window.KAIA_SRC = getSrc;
     if (!LINKS.freePopup || !LINKS.inquiryEndpoint) return;
     var box = document.createElement("div");
     box.className = "fc-pop"; box.setAttribute("role", "dialog"); box.setAttribute("aria-modal", "true"); box.setAttribute("aria-labelledby", "fc-t");
@@ -196,7 +204,7 @@
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) return bad(f["이메일"], "이메일 주소를 정확히 적어 주세요. (예: example@naver.com)");
       if (!f["개인정보동의"].checked || !f["안내수신동의"].checked) { err.textContent = "필수 동의 2가지에 체크해 주세요."; return; }
       var src = getSrc();
-      var data = { "구분": "무료특강", "접수시각": new Date().toLocaleString("ko-KR"), "이름": name, "전화번호": tel.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"), "이메일": mail, "유입경로": src[0], "첫 방문일": src[1], "신청페이지": from, "개인정보동의": "동의", "안내수신동의": "동의" };
+      var data = { "구분": "무료특강", "접수시각": new Date().toLocaleString("ko-KR"), "이름": name, "전화번호": tel.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"), "이메일": mail, "처음 유입경로": src.first, "최근 유입경로": src.last, "첫 방문일": src.firstDay, "신청페이지": from, "개인정보동의": "동의", "안내수신동의": "동의" };
       var go = form.querySelector(".fc-go"); go.disabled = true; go.textContent = "보내는 중…"; err.textContent = "";
       fetch(LINKS.inquiryEndpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) })
         .then(function () { form.reset(); form.hidden = true; done.hidden = false; })
