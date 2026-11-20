@@ -1,7 +1,7 @@
 {
   "name": "한국AI활용지도사교육연구협회 · 드림랩",
   "short_name": "드림랩",
-  "start_url": "index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f8f7f4",
   "theme_color": "#0f2350",

@@ -8,9 +8,9 @@
     pqi: "https://pqi.or.kr/inf/qul/infQulBasDetail.do?searchQulId=117865", /* 민간자격정보서비스 · AI활용지도사 등록 확인 */
     kakaoStore: "https://store.kakao.com/dreamlab", /* 카카오 스토어 기본(강사되기) */
     storeByPage: { /* 페이지별 '카카오 스토어에서 신청' 결제창 */
-      "ai-instructor.html": "https://store.kakao.com/dreamlab",
-      "shopping-shorts.html": "https://store.kakao.com/dreamlab/products/760301807",
-      "consulting.html": "https://store.kakao.com/dreamlab/products/685869221"
+      "ai": "https://store.kakao.com/dreamlab",
+      "ss": "https://store.kakao.com/dreamlab/products/760301807",
+      "cs": "https://store.kakao.com/dreamlab/products/685869221"
     },
     freePopup: true, /* true: 무료특강 버튼 → 홈페이지 안 신청창(구글시트 저장) / false: 기존 구글폼으로 이동 */
     inquiryEndpoint: "https://script.google.com/macros/s/AKfycbway5b3rpSJdRnVYIrIGo1CEvw5j32J5yF5k-7sboxI-3oiNjXH8n40nk-wmTXGi8h1rg/exec", /* 구글 Apps Script 웹앱 주소를 넣으면 강의 문의가 구글시트로 저장됨 */
@@ -23,18 +23,24 @@
   };
   window.KAIA_LINKS = LINKS;
 
+  /* 페이지 주소(짧은 주소): tc 소속강사소개 · qa 강의 문의 · ai AI강사되기 · ss 유튜브 쇼핑쇼츠 · cs 1:1 컨설팅 · ar AI 자료실 */
   var MENU = [
-    ["instructors.html", "소속강사소개"],
-    ["inquiry.html", "강의 문의"],
-    ["ai-instructor.html", "AI강사되기"],
-    ["shopping-shorts.html", "유튜브 쇼핑쇼츠"],
-    ["consulting.html", "1:1 컨설팅"],
-    ["archive.html", "AI 자료실"]
+    ["tc", "소속강사소개"],
+    ["qa", "강의 문의"],
+    ["ai", "AI강사되기"],
+    ["ss", "유튜브 쇼핑쇼츠"],
+    ["cs", "1:1 컨설팅"],
+    ["ar", "AI 자료실"]
   ];
-  var here = location.pathname.split("/").pop() || "index.html";
+  /* 이 파일(js/site.js) 위치로 홈페이지 맨 위 주소를 알아냄 → 어느 폴더의 페이지에서도 링크가 맞게 */
+  var me = document.currentScript || document.querySelector('script[src*="js/site.js"]');
+  var ROOT = me ? me.src.replace(/js\/site\.js.*$/, "") : "./";
+  var here = location.href.indexOf(ROOT) === 0 ? location.href.slice(ROOT.length).split(/[\/?#]/)[0] : "";
+  if (here === "index.html") here = "";
+  window.KAIA_ROOT = ROOT;
 
   var nav = MENU.map(function (m) {
-    return '<a href="' + m[0] + '"' + (m[0] === here ? ' aria-current="page"' : "") + ">" + m[1] + "</a>";
+    return '<a href="' + ROOT + m[0] + '/"' + (m[0] === here ? ' aria-current="page"' : "") + ">" + m[1] + "</a>";
   }).join("");
 
   var head = document.getElementById("site-head");
@@ -42,7 +48,7 @@
     head.className = "site-head";
     head.innerHTML =
       '<div class="wrap head-row">' +
-      '<a class="logo" href="index.html"><img class="logo-mark" src="img/dreamlab-mark.png" width="96" height="96" alt="">' +
+      '<a class="logo" href="' + ROOT + '"><img class="logo-mark" src="' + ROOT + 'img/dreamlab-mark.png" width="96" height="96" alt="">' +
       '<span class="logo-text"><b>한국AI활용지도사교육연구협회</b><small>DREAMLAB · 드림랩</small></span></a>' +
       '<nav class="nav" id="main-nav" aria-label="주 메뉴">' + nav + "</nav>" +
       '<button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">메뉴</button>' +
@@ -54,8 +60,8 @@
     foot.className = "site-foot";
     foot.innerHTML =
       '<div class="wrap"><div class="foot-grid">' +
-      "<div><img class=\"foot-logo\" src=\"img/dreamlab-logo.jpg\" width=\"120\" height=\"120\" alt=\"드림랩 로고\"><h4>한국AI활용지도사교육연구협회</h4><p>경력을 쉬었던 분, 은퇴 후 인생 2막을 준비하는 분이<br>AI강사와 크리에이터로 다시 일하도록 돕습니다.</p></div>" +
-      "<div><h4>바로가기</h4><ul>" + MENU.map(function (m) { return '<li><a href="' + m[0] + '">' + m[1] + "</a></li>"; }).join("") + "</ul></div>" +
+      "<div><img class=\"foot-logo\" src=\"" + ROOT + "img/dreamlab-logo.jpg\" width=\"120\" height=\"120\" alt=\"드림랩 로고\"><h4>한국AI활용지도사교육연구협회</h4><p>경력을 쉬었던 분, 은퇴 후 인생 2막을 준비하는 분이<br>AI강사와 크리에이터로 다시 일하도록 돕습니다.</p></div>" +
+      "<div><h4>바로가기</h4><ul>" + MENU.map(function (m) { return '<li><a href="' + ROOT + m[0] + '/">' + m[1] + "</a></li>"; }).join("") + "</ul></div>" +
       "<div><h4>채널</h4><ul>" +
       '<li><a href="' + LINKS.youtube + '" target="_blank" rel="noopener">유튜브 · 드림랩</a></li>' +
       '<li><a href="' + LINKS.blog + '" target="_blank" rel="noopener">네이버 블로그</a></li>' +
