@@ -137,7 +137,7 @@
   /* ---------- 무료특강 신청창 ---------- */
   (function () {
     /* 처음 들어온 경로 기억: 짧은 주소(dreamlabai.org/ig 등) → ?from=ig → 이 브라우저에 90일간 저장.
-       여러 페이지를 둘러보다가 며칠 뒤 신청해도 '처음 알게 된 곳'이 그대로 기록됩니다. */
+       여러 페이지를 둘러보다가 며칠 뒤 신청해도 '마지막으로 누른 짧은 주소'가 기록됩니다. */
     var SRC = { ig: "인스타그램", yt: "유튜브", tt: "틱톡", fb: "페이스북", dg: "당근", blog: "네이버 블로그", kt: "카카오톡 채널", oc: "오픈톡방", live: "실시간 온라인 강의", off: "오프라인 강의", qr: "QR코드" };
     function srcName(v) { return SRC[v] || v; }
     try {
@@ -146,7 +146,9 @@
       if (saved && Date.now() - saved.t > 90 * 864e5) saved = null;
       var ref = "";
       if (!code && document.referrer) { var rh = new URL(document.referrer).hostname.replace(/^www\./, ""); if (rh && rh !== location.hostname.replace(/^www\./, "")) ref = rh; }
-      if (!saved && (code || ref)) localStorage.setItem("kaia_src", JSON.stringify({ s: code ? srcName(code) : ref + " (링크)", t: Date.now() }));
+      /* 짧은 주소(?from=)로 들어오면 그 경로로 새로 기록(가장 최근에 누른 링크가 우선). 그냥 들어오면 이전 기록 유지 */
+      if (code) localStorage.setItem("kaia_src", JSON.stringify({ s: srcName(code), t: Date.now() }));
+      else if (!saved && ref) localStorage.setItem("kaia_src", JSON.stringify({ s: ref + " (링크)", t: Date.now() }));
       else if (!saved) localStorage.setItem("kaia_src", JSON.stringify({ s: "직접 방문", t: Date.now() }));
       if (code && history.replaceState) { q.delete("from"); history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : "") + location.hash); }
     } catch (e) {}
