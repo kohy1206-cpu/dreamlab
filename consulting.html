@@ -163,6 +163,43 @@
   .refund { margin-top: 2px; background: #fff4d1; border: 2px dashed #e0b800; border-radius: 12px; padding: 10px 14px; font-size: .84rem; color: var(--ink-soft) !important; line-height: 1.55; }
   .refund b { display: block; color: #b3170f; font-size: .95rem; }
   .refund-note { font-size: .86rem; font-weight: 700; color: var(--marker) !important; }
+  /* 3D 건물: 비스듬히 지어졌다가 정면으로 */
+  .cs-hero .wrap { align-items: stretch; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); }
+  .cs-hero .wrap > * { min-width: 0; }
+  @media (max-width: 860px) { .cs-hero .wrap { grid-template-columns: minmax(0,1fr); } }
+  .cs-hero .wrap > div:first-child { align-self: center; }
+  .cb-wrap { width: 100%; height: var(--cbh, 560px); display: flex; align-items: center; justify-content: center; overflow: visible; }
+  .cb-scene { perspective: 1800px; width: 480px; height: var(--cbfull, 600px); flex: none; display: flex; justify-content: center; align-items: flex-start; padding-top: 30px; transform: scale(var(--cbs, 1)); transform-origin: center center; }
+  .cb { position: relative; width: 380px; height: 480px; transform-style: preserve-3d; transform-origin: 50% 60%; transform: rotateX(0) rotateY(0); transition: transform 1.6s cubic-bezier(.6,0,.2,1) 2.3s; }
+  .motion .cb-wrap:not(.in) .cb { transform: rotateX(-24deg) rotateY(-40deg); transition: none; }
+  .cb * { transform-style: preserve-3d; }
+  .cb-fl, .cb-rf { position: absolute; left: 0; width: 380px; transition: transform .7s cubic-bezier(.2,.9,.3,1.25), opacity .5s; }
+  .cb-fl { height: 76px; } .cb-rf { top: 0; height: 100px; }
+  .motion .cb-wrap:not(.in) .cb-fl, .motion .cb-wrap:not(.in) .cb-rf { opacity: 0; transform: translateY(-160px); }
+  .cb-wrap .d1 { transition-delay: .1s; } .cb-wrap .d2 { transition-delay: .4s; } .cb-wrap .d3 { transition-delay: .7s; } .cb-wrap .d4 { transition-delay: 1s; } .cb-wrap .d5 { transition-delay: 1.3s; } .cb-wrap .cb-rf { transition-delay: 1.65s; }
+  .cf { position: absolute; backface-visibility: hidden; }
+  .cb-fr, .cb-bk { width: 380px; height: 76px; left: 0; top: 0; }
+  .cb-fr { transform: translateZ(100.0px); background: linear-gradient(90deg, #2350b0, #3a6bd6); border: 2px solid rgba(255,255,255,.55); display: flex; align-items: center; justify-content: space-between; padding: 0 22px; color: #fff; }
+  .cb-fr.tech { background: linear-gradient(90deg, #138a76, #20bfa3); }
+  .cb-fr b { font-size: 1rem; white-space: nowrap; }
+  .cb-fr span { font-family: var(--font-display); font-weight: 800; color: var(--marker); font-size: 1.05rem; }
+  .cb-bk { transform: rotateY(180deg) translateZ(100.0px); background: #16306e; }
+  .cb-rt, .cb-lf { width: 200px; height: 76px; left: 90.0px; top: 0; background: #1d3f8f; border: 2px solid rgba(255,255,255,.35); }
+  .cb-rt.tech, .cb-lf.tech { background: #0f7464; }
+  .cb-rt { transform: rotateY(90deg) translateZ(190.0px); display: flex; align-items: center; justify-content: space-evenly; }
+  .cb-rt i { width: 30px; height: 42px; background: rgba(255,216,77,.75); border: 1.5px solid rgba(255,255,255,.6); }
+  .cb-lf { transform: rotateY(-90deg) translateZ(190.0px); }
+  .cb-tp { width: 380px; height: 200px; left: 0; top: -62.0px; transform: rotateX(90deg) translateZ(38.0px); background: #2a4f9e; }
+  .cb-tri { position: absolute; left: 0; top: 0; width: 380px; height: 100px; clip-path: polygon(50% 0, 100% 100%, 0 100%); backface-visibility: hidden; }
+  .cb-tf { transform: translateZ(100.0px); background: #ffd84d; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; }
+  .cb-tf b { font-size: .8rem; color: var(--brand-deep); }
+  .cb-tb { transform: rotateY(180deg) translateZ(100.0px); background: #e8b800; }
+  .cb-slope { position: absolute; height: 200px; background: #f2c200; border: 1px solid #b38e00; }
+  .cb-slope.sl { background: #ffd84d; }
+  .cb-gd { position: absolute; left: -50px; top: 480px; width: 480px; }
+  .cb-slab { position: absolute; left: 0; top: -150px; width: 480px; height: 300px; background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.3); transform: rotateX(90deg); }
+  .cb-slab-f { position: absolute; left: 0; top: 0; width: 480px; height: 28px; transform: translateZ(150px); background: rgba(255,255,255,.22); font-size: .74rem; font-weight: 700; color: #e7ecf7; display: flex; align-items: center; justify-content: center; }
+  @media (prefers-reduced-motion: reduce) { .cb, .cb-fl, .cb-rf { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -182,15 +219,7 @@
         </div>
         <div class="hero-chips"><span>4주 마스터 코스</span><span>3주 기술 독립 케어</span><span>무제한 1:1 Zoom 케어</span></div>
       </div>
-      <div class="tower on-view" aria-hidden="true">
-        <div class="ground"></div>
-        <div class="fl"><span>퍼스널 브랜딩 &amp; 기획</span><i>1F</i></div>
-        <div class="fl"><span>채널 세팅</span><i>2F</i></div>
-        <div class="fl"><span>세일즈 퍼널 &amp; 웨비나</span><i>3F</i></div>
-        <div class="fl"><span>운영 시스템 &amp; 확장</span><i>4F</i></div>
-        <div class="fl tech"><span>1:1 밀착 멘토링</span><i>5~7F</i></div>
-        <div class="roof"></div>
-      </div>
+      <div class="cb-wrap on-view" role="img" aria-label="7주 동안 짓는 온라인 수익 건물: 1층 퍼스널 브랜딩과 기획, 2층 채널 세팅, 3층 세일즈 퍼널과 웨비나, 4층 운영 시스템과 확장, 5~7층 1:1 밀착 멘토링"><div class="cb-scene"><div class="cb"><div class="cb-gd"><div class="cb-slab"></div><div class="cb-slab-f">기초 공사 · 평생 쌓아 온 노하우</div></div><div class="cb-fl d1" style="top:404px"><div class="cf cb-fr"><b>퍼스널 브랜딩 &amp; 기획</b><span>1F</span></div><div class="cf cb-bk"></div><div class="cf cb-rt"><i></i><i></i><i></i></div><div class="cf cb-lf"></div></div><div class="cb-fl d2" style="top:328px"><div class="cf cb-fr"><b>채널 세팅</b><span>2F</span></div><div class="cf cb-bk"></div><div class="cf cb-rt"><i></i><i></i><i></i></div><div class="cf cb-lf"></div></div><div class="cb-fl d3" style="top:252px"><div class="cf cb-fr"><b>세일즈 퍼널 &amp; 웨비나</b><span>3F</span></div><div class="cf cb-bk"></div><div class="cf cb-rt"><i></i><i></i><i></i></div><div class="cf cb-lf"></div></div><div class="cb-fl d4" style="top:176px"><div class="cf cb-fr"><b>운영 시스템 &amp; 확장</b><span>4F</span></div><div class="cf cb-bk"></div><div class="cf cb-rt"><i></i><i></i><i></i></div><div class="cf cb-lf"></div></div><div class="cb-fl d5" style="top:100px"><div class="cf cb-fr tech"><b>1:1 밀착 멘토링</b><span>5~7F</span></div><div class="cf cb-bk"></div><div class="cf cb-rt tech"><i></i><i></i><i></i></div><div class="cf cb-lf tech"></div><div class="cf cb-tp"></div></div><div class="cb-rf"><div class="cb-tri cb-tf"><b>내 이름의 온라인 건물</b></div><div class="cb-tri cb-tb"></div><div class="cb-slope sr" style="left:177.6px;top:-50.0px;width:214.7px;transform:rotateZ(27.76deg) rotateX(90deg)"></div><div class="cb-slope sl" style="left:-12.4px;top:-50.0px;width:214.7px;transform:rotateZ(-27.76deg) rotateX(90deg)"></div></div></div></div></div>
     </div>
   </section>
 
@@ -340,7 +369,7 @@
         <h2>이렇게 진행됩니다</h2>
       </div>
       <ol class="flow reveal">
-        <li><b>문자 · 카톡 상담</b><span>원하는 방향을 편하게 말씀해 주세요</span></li>
+        <li><b>사전 상담 전화 ·&nbsp;줌 사전 미팅</b><span>원하는 방향을 편하게 말씀해 주세요</span></li>
         <li><b>1차 컨셉 컨설팅</b><span>Zoom 90분, 강의 사업성 검토</span></li>
         <li><b>7주 과정 시작</b><span>브랜딩부터 퍼널까지 함께 구축</span></li>
         <li><b>강사 데뷔</b><span>무료특강 호스트로 첫 모집</span></li>
@@ -365,5 +394,19 @@
 <footer id="site-foot"></footer>
 <div id="dock"></div>
 <script src="js/site.js"></script>
+<script>
+/* 건물 높이를 왼쪽 글 높이에 맞추기 */
+(function () {
+  var txt = document.querySelector(".cs-hero .wrap > div:first-child"), sc = document.querySelector(".cb-scene"), cb = document.querySelector(".cb");
+  if (!txt || !sc) return;
+  function fit() {
+    var h = txt.getBoundingClientRect().height, full = 540, w = sc.getBoundingClientRect().width;
+    var pw = sc.parentNode.getBoundingClientRect().width; var s = Math.min(h / full, (pw - 10) / 480, 1.3); if (window.innerWidth <= 860) s = Math.min((pw - 10) / 480, .8);
+    sc.style.setProperty("--cbs", s.toFixed(3)); sc.style.setProperty("--cbfull", full + "px"); sc.parentNode.style.setProperty("--cbh", Math.round(full * s) + "px");
+  }
+  fit(); addEventListener("resize", fit);
+})();
+</script>
+
 </body>
 </html>

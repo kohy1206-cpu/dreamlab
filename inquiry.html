@@ -336,7 +336,7 @@
 <script>
 (function(){
   var form=document.getElementById('iq-form'),err=document.getElementById('err'),modal=document.getElementById('confirm');
-  function data(){var fd=new FormData(form),o={};fd.forEach(function(v,k){o[k]=o[k]?o[k]+', '+v:v;});o['접수시각']=new Date().toLocaleString('ko-KR');o['보낸곳']='홈페이지 강의 문의';return o;}
+  function data(){var fd=new FormData(form),o={};fd.forEach(function(v,k){o[k]=o[k]?o[k]+', '+v:v;});o['접수시각']=new Date().toLocaleString('ko-KR');o['보낸곳']='홈페이지 강의 문의';try{var v=JSON.parse(localStorage.getItem('kaia_src')||'null');o['유입경로']=v?v.s:'알 수 없음';}catch(e){}return o;}
   form.addEventListener('submit',function(e){e.preventDefault();err.textContent='';
     var miss=[].slice.call(form.querySelectorAll('[required]')).filter(function(i){return !i.value.trim();});
     if(miss.length){err.textContent='꼭 적어야 할 칸이 비어 있어요: '+miss.map(function(i){return i.previousElementSibling.textContent.replace('*','');}).join(', ');miss[0].focus();return;}

@@ -148,3 +148,37 @@ p { margin: 0; }
 .sms-msg { min-height: 1.4em; margin-top: 12px; font-size: .86rem; font-weight: 700; color: #138a76; }
 .sms-or { margin-top: 8px; font-size: .84rem; color: var(--ink-soft); }
 .sms-or a { font-weight: 700; }
+
+/* ---------- 무료특강 신청창 ---------- */
+.fc-pop { position: fixed; inset: 0; z-index: 210; background: rgba(10,20,45,.6); display: none; place-items: center; padding: 16px; overflow-y: auto; }
+.fc-pop.open { display: grid; }
+.fc-box { position: relative; background: #fff; border-radius: 24px; width: 100%; max-width: 520px; padding: 30px 26px 24px; box-shadow: 0 30px 60px rgba(0,0,0,.3); border-top: 8px solid var(--brand); animation: smsIn .25s ease; margin: auto; }
+.fc-x { position: absolute; top: 10px; right: 12px; border: 0; background: none; font-size: 1.9rem; line-height: 1; color: var(--ink-soft); cursor: pointer; padding: 6px 10px; }
+.fc-badge { display: inline-block; background: var(--marker); color: var(--brand-deep); font-weight: 800; font-size: .76rem; padding: 4px 12px; border-radius: 999px; margin-bottom: 10px; }
+.fc-box h3 { font-size: 1.3rem; line-height: 1.45; margin-bottom: 6px; }
+.fc-box h3 em { font-style: normal; color: var(--brand); }
+.fc-sub { color: var(--ink-soft); font-size: .88rem; margin-bottom: 16px; }
+.fc-f { display: grid; gap: 5px; margin-bottom: 12px; border: 0; padding: 0; }
+.fc-f > span, .fc-f legend { font-weight: 700; font-size: .88rem; padding: 0; }
+.fc-f i { color: #e5484d; font-style: normal; }
+.fc-f input:not([type=radio]) { font: inherit; font-size: 1rem; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: #fbfcfe; width: 100%; }
+.fc-f input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px rgba(35,80,176,.12); background: #fff; }
+.fc-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+.fc-chips input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fc-chips label { font-size: .84rem; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fbfcfe; cursor: pointer; }
+.fc-chips input:checked + label { background: var(--brand); color: #fff; border-color: var(--brand); }
+.fc-chips input:focus-visible + label { outline: 3px solid var(--marker); outline-offset: 2px; }
+.fc-etc { margin-top: 8px; }
+.fc-agree { background: var(--paper); border-radius: 14px; padding: 12px 14px; display: grid; gap: 8px; font-size: .84rem; }
+.fc-agree label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; }
+.fc-agree input { width: 19px; height: 19px; accent-color: var(--brand); flex: none; margin-top: 2px; }
+.fc-agree b { color: var(--brand); }
+.fc-agree details { margin-left: 27px; color: var(--ink-soft); font-size: .78rem; }
+.fc-agree summary { cursor: pointer; color: var(--brand); font-weight: 700; }
+.fc-err { min-height: 1.3em; color: #e5484d; font-size: .86rem; font-weight: 700; margin: 10px 0 6px; }
+.fc-go { width: 100%; }
+.fc-done { text-align: center; padding: 10px 0 4px; }
+.fc-done .fc-ic { font-size: 2.6rem; }
+.fc-done p { color: var(--ink-soft); font-size: .92rem; margin: 8px 0 18px; }
+
+.fc-f input.fc-bad { border-color: #e5484d; box-shadow: 0 0 0 4px rgba(229,72,77,.12); background: #fff6f6; }

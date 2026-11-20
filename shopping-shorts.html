@@ -511,7 +511,7 @@
       <h2>한 번 만든 영상이<br>계속 일하게 만드세요</h2>
       <p>먼저 무료특강으로 쇼핑쇼츠가 나에게 맞는지 확인해 보셔도 좋습니다.</p>
       <div class="btn-row">
-        <a class="btn js-free" style="background:#fff;color:var(--yt)" href="#" target="_blank" rel="noopener">무료특강 신청</a>
+        <a class="btn js-free" style="background:#fff;color:var(--yt)" href="#free-apply">무료특강 신청</a>
         <a class="btn btn-line" href="https://pf.kakao.com/_qHhpG/chat" target="_blank" rel="noopener">카카오톡으로 상담하기</a>
       </div>
     </div>
@@ -531,7 +531,7 @@
 })();
 
 /* 무료특강 버튼 */
-document.querySelectorAll(".js-free").forEach(function (a) { a.href = window.KAIA_LINKS.freeClass; a.target = "_blank"; a.rel = "noopener"; });
+document.querySelectorAll(".js-free").forEach(function (a) { if (!window.KAIA_LINKS.freePopup) { a.href = window.KAIA_LINKS.freeClass; a.target = "_blank"; a.rel = "noopener"; } });
 
 /* 1분 자가 진단 */
 (function () {

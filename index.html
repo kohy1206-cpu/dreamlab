@@ -203,6 +203,12 @@
   .history li { position: relative; }
   .history li::before { content: ""; position: absolute; left: -38px; top: 6px; width: 17px; height: 17px; border-radius: 50%; background: var(--card); border: 3px solid var(--brand); }
   .history time { font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; display: block; }
+  .info-head { margin-bottom: 16px; gap: 4px; }
+  .info-head h2 { font-size: clamp(1.25rem, 2.6vw, 1.55rem); }
+  .info { font-size: .8rem; }
+  .info th, .info td { padding: 13px 14px; line-height: 1.55; }
+  .info th { width: 6.5em; }
+  .about-grid > div:first-child .reel { margin-bottom: 28px; }
   @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
   @media (max-width: 600px) { .info th, .info td { display: block; width: auto; } .info th { padding-bottom: 4px; border-bottom: 0; } }
   .free-call { margin: 32px auto 0; max-width: 860px; background: var(--card); border-radius: 20px; padding: 22px 26px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; text-align: left; box-shadow: 0 8px 22px rgba(15,35,80,.08); border-left: 6px solid var(--marker); }
@@ -270,10 +276,13 @@
   .reel-dots { display: flex; gap: 6px; }
   .reel-dots i { width: 8px; height: 8px; border-radius: 99px; background: rgba(255,255,255,.5); transition: width .3s, background .3s; }
   .reel-dots i.on { width: 22px; background: var(--marker); }
-  .reel-yt { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,.55); color: #fff; font-size: .74rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; text-decoration: none; }
+  .reel-yt { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.5); color: #fff; font-size: .62rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; text-decoration: none; }
   .reel-yt:hover { background: #e62117; }
-  .reel-snd { position: absolute; top: 12px; left: 12px; z-index: 2; border: 0; cursor: pointer; font: inherit; font-size: .8rem; font-weight: 800; padding: 8px 14px; border-radius: 999px; background: var(--marker); color: var(--brand-deep); box-shadow: 0 6px 14px rgba(0,0,0,.3); animation: sndPulse 2s ease-in-out infinite; }
-  .reel-snd[aria-pressed="true"] { background: rgba(0,0,0,.55); color: #fff; animation: none; }
+  .reel-ctl { position: absolute; top: 10px; left: 10px; z-index: 2; display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,.45); border-radius: 999px; padding: 3px 8px 3px 3px; }
+  .reel-snd { border: 0; cursor: pointer; font: inherit; font-size: .64rem; font-weight: 800; padding: 4px 9px; border-radius: 999px; background: var(--marker); color: var(--brand-deep); animation: sndPulse 2s ease-in-out infinite; }
+  .reel-vol { width: 0; opacity: 0; transition: width .25s, opacity .25s; accent-color: var(--marker); height: 4px; cursor: pointer; }
+  .reel-ctl.on .reel-vol { width: 74px; opacity: 1; }
+  .reel-snd[aria-pressed="true"] { background: transparent; color: #fff; animation: none; padding: 4px 6px; }
   @keyframes sndPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
   @media (prefers-reduced-motion: reduce) { .reel-snd { animation: none; } }
 </style>
@@ -477,10 +486,10 @@
         <figure class="reel reveal" aria-label="드림랩 소개 영상">
           <video id="reel-v" muted playsinline autoplay preload="metadata" poster="video/intro-1.jpg" src="video/intro-1.mp4"></video>
           <figcaption><span class="reel-tag">▶ DREAMLAB</span><span class="reel-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></figcaption>
-          <button type="button" class="reel-snd" id="reel-snd" aria-pressed="false">🔇 소리 켜기</button>
+          <div class="reel-ctl"><button type="button" class="reel-snd" id="reel-snd" aria-pressed="false">🔇 소리 켜기</button><input type="range" id="reel-vol" class="reel-vol" min="0" max="1" step="0.05" value="0.7" aria-label="소리 크기"></div>
           <a class="reel-yt" href="https://www.youtube.com/@%EB%93%9C%EB%A6%BC%EB%9E%A9" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>
         </figure>
-        <div class="section-head reveal"><p class="eyebrow">협회 개요</p><h2>한눈에 보는 협회</h2></div>
+        <div class="section-head reveal info-head"><p class="eyebrow">협회 개요</p><h2>한눈에 보는 협회</h2></div>
         <table class="info reveal">
           <tr><th scope="row">단체명</th><td>한국AI활용지도사교육연구협회</td></tr>
           <tr><th scope="row">협회장</th><td>고현미(지니쌤)</td></tr>
@@ -501,7 +510,7 @@
           <li class="reveal"><time>2026. 01</time>“66세 컴맹, 6개월 만에 AI 작가·강사” 수강생 인터뷰 공개 · AI강사 데뷔 무료특강 개최</li>
           <li class="reveal"><time>2026</time>1:1 컨설팅 런칭</li>
           <li class="reveal"><time>2026. 09</time>유튜브 쇼핑쇼츠 실전 무료특강 개최</li>
-          <li class="reveal"><time>2026</time>AI활용지도사 자격 발급 20명</li>
+          <li class="reveal"><time>2026. 06 현재</time>AI활용지도사 자격 발급 20명 (진행 중)</li>
         </ol>
       </div>
     </div>
@@ -547,10 +556,10 @@
       <div class="steps">
         <div class="step reveal"><b>1</b><p>구글폼으로 특강 신청</p></div>
         <div class="step reveal" data-delay="1"><b>2</b><p><a href="https://open.kakao.com/o/g3pg6Yqg" target="_blank" rel="noopener">드림랩 오픈톡방</a> 입장</p></div>
-        <div class="step reveal" data-delay="2"><b>3</b><p>당일 문자로 받은 Zoom 링크로 접속</p></div>
+        <div class="step reveal" data-delay="2"><b>3</b><p>문자·카톡, 이메일로 받은 줌링크로 접속</p></div>
       </div>
       <div class="btn-row">
-        <a class="btn btn-primary" id="free-link" href="#" target="_blank" rel="noopener">다음 무료특강 신청하기</a>
+        <a class="btn btn-primary js-free" id="free-link" href="#free-apply">다음 무료특강 신청하기</a>
         <a class="btn btn-kakao" href="https://open.kakao.com/o/g3pg6Yqg" target="_blank" rel="noopener">드림랩 오픈톡방 입장</a>
       </div>
       <p class="hero-note">다음 특강 일정은 <a href="https://pf.kakao.com/_qHhpG" target="_blank" rel="noopener">드림랩 카카오톡 채널</a>로 가장 먼저 안내해 드려요.</p>
@@ -580,13 +589,16 @@
   var dots = document.querySelectorAll(".reel-dots i");
   function play() { var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; setBtn(); v.play(); }); }
   var snd = document.getElementById("reel-snd");
-  function setBtn() { if (!snd) return; snd.setAttribute("aria-pressed", v.muted ? "false" : "true"); snd.textContent = v.muted ? "🔇 소리 켜기" : "🔊 소리 끄기"; }
-  if (snd) snd.addEventListener("click", function () { v.muted = !v.muted; setBtn(); play(); });
+  var vol = document.getElementById("reel-vol"), ctl = snd && snd.parentNode;
+  v.volume = vol ? +vol.value : .7;
+  function setBtn() { if (!snd) return; snd.setAttribute("aria-pressed", v.muted ? "false" : "true"); snd.textContent = v.muted ? "🔇 소리 켜기" : (v.volume > .5 ? "🔊" : v.volume > 0 ? "🔉" : "🔈"); if (ctl) ctl.classList.toggle("on", !v.muted); }
+  if (snd) snd.addEventListener("click", function () { v.muted = !v.muted; if (!v.muted && v.volume === 0) { v.volume = .7; vol.value = .7; } setBtn(); play(); });
+  if (vol) vol.addEventListener("input", function () { v.volume = +vol.value; if (v.volume > 0 && v.muted) v.muted = false; if (v.volume === 0) v.muted = true; setBtn(); play(); });
   v.addEventListener("ended", function () {
     v.classList.add("fade");
     setTimeout(function () {
       i = (i + 1) % list.length; dots.forEach(function (d, n) { d.classList.toggle("on", n === i); });
-      var m = v.muted; v.poster = list[i].replace(".mp4", ".jpg"); v.src = list[i]; v.load(); v.muted = m; play(); v.classList.remove("fade");
+      var m = v.muted, vv = v.volume; v.poster = list[i].replace(".mp4", ".jpg"); v.src = list[i]; v.load(); v.muted = m; v.volume = vv; play(); v.classList.remove("fade");
     }, 350);
   });
   if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? play() : v.pause(); }); }, { threshold: .25 }).observe(v);
@@ -594,6 +606,6 @@
 })();
 </script>
 
-<script>(function(){var a=document.getElementById("free-link");a.href=window.KAIA_LINKS.freeClass;a.target="_blank";a.rel="noopener";})();</script>
+<script>(function(){var a=document.getElementById("free-link");if(!window.KAIA_LINKS.freePopup){a.href=window.KAIA_LINKS.freeClass;a.target="_blank";a.rel="noopener";}})();</script>
 </body>
 </html>
