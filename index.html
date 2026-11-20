@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#0f2350">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=20261121">
 <style>
   /* ---------- 첫 화면 ---------- */
   .hero { padding: 56px 0 64px; border-bottom: 1px solid var(--line); overflow: hidden; }
@@ -484,7 +484,7 @@
     <div class="wrap about-grid">
       <div>
         <figure class="reel reveal" aria-label="드림랩 소개 영상">
-          <video id="reel-v" muted playsinline autoplay preload="metadata" poster="video/intro-1.jpg" src="video/intro-1.mp4"></video>
+          <video id="reel-v" muted playsinline autoplay preload="metadata" poster="video/intro-1.jpg?v=20261121" src="video/intro-1.mp4?v=20261121"></video>
           <figcaption><span class="reel-tag">▶ DREAMLAB</span><span class="reel-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></figcaption>
           <div class="reel-ctl"><button type="button" class="reel-snd" id="reel-snd" aria-pressed="false">🔇 소리 켜기</button><input type="range" id="reel-vol" class="reel-vol" min="0" max="1" step="0.05" value="0.7" aria-label="소리 크기"></div>
           <a class="reel-yt" href="https://www.youtube.com/@%EB%93%9C%EB%A6%BC%EB%9E%A9" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>
@@ -580,12 +580,12 @@
 
 <footer id="site-foot"></footer>
 <div id="dock"></div>
-<script src="js/site.js"></script>
+<script src="js/site.js?v=20261121"></script>
 <script>
 /* 협회 소개 영상: 끝나면 다음 영상, 4개 반복 */
 (function () {
   var v = document.getElementById("reel-v"); if (!v) return;
-  var list = ["video/intro-1.mp4", "video/intro-2.mp4", "video/intro-3.mp4", "video/intro-4.mp4"], i = 0;
+  var list = ["video/intro-1.mp4?v=20261121", "video/intro-2.mp4", "video/intro-3.mp4", "video/intro-4.mp4"], i = 0;
   var dots = document.querySelectorAll(".reel-dots i");
   function play() { var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; setBtn(); v.play(); }); }
   var snd = document.getElementById("reel-snd");
