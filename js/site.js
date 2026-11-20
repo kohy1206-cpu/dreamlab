@@ -30,9 +30,6 @@
     ["consulting.html", "1:1 컨설팅"],
     ["archive.html", "AI 자료실"]
   ];
-  if (!document.querySelector('link[rel="icon"]')) {
-    var ic = document.createElement("link"); ic.rel = "icon"; ic.type = "image/png"; ic.href = "img/favicon.png"; document.head.appendChild(ic);
-  }
   var here = location.pathname.split("/").pop() || "index.html";
 
   var nav = MENU.map(function (m) {
