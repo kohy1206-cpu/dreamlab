@@ -178,6 +178,22 @@
   .stage .board .crew-line { display: block; width: 60%; height: 1px; margin: 10px auto; background: rgba(255,255,255,.3); }
   .stage .board .vision { display: block; font-size: .9rem; font-weight: 700; color: #fff; }
   .stage .board .vision em { font-style: normal; color: #ff5c5f; }
+  /* 휴대폰: 수강료 표를 카드로 (옆으로 밀지 않아도 다 보이게) */
+  @media (max-width: 700px) {
+    .fee-wrap { overflow: visible; background: none; box-shadow: none; }
+    .fee { min-width: 0; }
+    .fee thead { display: none; }
+    .fee, .fee tbody, .fee tr, .fee td { display: block; width: 100%; }
+    .fee tr { background: var(--card); border-radius: 18px; box-shadow: 0 8px 20px rgba(15,35,80,.08); margin-bottom: 14px; overflow: hidden; }
+    .fee tr.hl { border: 2px solid var(--marker); }
+    .fee td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 18px; border-bottom: 1px dashed var(--line); text-align: right; }
+    .fee td::before { content: attr(data-label); color: var(--ink-soft); font-size: .86rem; font-weight: 700; text-align: left; white-space: nowrap; }
+    .fee td:first-child { display: block; text-align: left; background: var(--brand-deep); color: #fff; font-weight: 700; font-size: 1.02rem; padding: 14px 18px; border: 0; }
+    .fee td:first-child::before { display: none; }
+    .fee tr.hl td { background: #fff9dc; } .fee tr.hl td:first-child { background: var(--brand-deep); }
+    .fee td:last-child { border-bottom: 0; }
+    .fee td.now { font-size: 1.25rem; }
+  }
 </style>
 </head>
 <body>
@@ -303,7 +319,7 @@
             <li><span>강의 교안 · PDF 자료집 · 커뮤니티 · 수업 녹화본</span></li>
           </ul>
           <div class="price"><del>정가 55만원</del><strong>39<small>만원</small></strong><span>무이자 5개월 시 월 7.8만원</span></div>
-          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024811" href="https://store.kakao.com/dreamlab/products/689024811">카카오 스토어에서 신청</a>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024811" href="https://store.kakao.com/dreamlab/products/689024811" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
         </article>
         <article class="course reveal" data-delay="1">
           <span class="lvl">심화 · 총 4회</span>
@@ -315,7 +331,7 @@
             <li><span>시크릿 팁 &amp; Q&amp;A 1년 회원권<em>39.6만원 상당</em>실시간 질의응답, 실무 노하우와 면접 정보 공유</span></li>
           </ul>
           <div class="price"><del>정가 66만원</del><strong>44<small>만원</small></strong><span>무이자 5개월 시 월 8.8만원</span></div>
-          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024641" href="https://store.kakao.com/dreamlab/products/689024641">카카오 스토어에서 신청</a>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024641" href="https://store.kakao.com/dreamlab/products/689024641" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
         </article>
         <article class="course reveal" data-delay="2">
           <span class="lvl">합격 대비 · Master Class</span>
@@ -327,7 +343,7 @@
             <li><span>1:1 맞춤 코칭 60분<em>39.6만원 상당</em>이력서·면접 요령 강의 VOD(60분) 또는 Zoom 실시간</span></li>
           </ul>
           <div class="price"><del>정가 33만원</del><strong>20<small>만원</small></strong><span>무이자 5개월 시 월 4만원</span></div>
-          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/685871822" href="https://store.kakao.com/dreamlab/products/685871822">카카오 스토어에서 신청</a>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/685871822" href="https://store.kakao.com/dreamlab/products/685871822" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
         </article>
       </div>
     </div>
@@ -353,7 +369,7 @@
           <del>정가 140만원</del>
           <strong>89<small>만원</small></strong>
           <p>무이자 5개월 시 월 17.8만원</p>
-          <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab/products/685871753" href="https://store.kakao.com/dreamlab/products/685871753">카카오 스토어에서 신청</a>
+          <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab/products/685871753" href="https://store.kakao.com/dreamlab/products/685871753" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
         </div>
       </div>
     </div>
@@ -370,10 +386,10 @@
         <table class="fee">
           <thead><tr><th>과정</th><th>정가</th><th>할인가</th><th>무이자 5개월</th><th>현금 결제</th></tr></thead>
           <tbody>
-            <tr><td>AI활용지도사 2급 자격증반</td><td><del>55만원</del></td><td class="now">39만원</td><td>월 7.8만원</td><td>37만원</td></tr>
-            <tr><td>AI활용지도사 1급 자격증반</td><td><del>66만원</del></td><td class="now">44만원</td><td>월 8.8만원</td><td>42만원</td></tr>
-            <tr><td>1:1 이력서 · 면접 컨설팅</td><td><del>33만원</del></td><td class="now">20만원</td><td>월 4만원</td><td>19만원</td></tr>
-            <tr class="hl"><td><b>올인원 AI강사되기</b> (2급+1급+면접)</td><td><del>140만원</del></td><td class="now">89만원</td><td>월 17.8만원</td><td>85만원</td></tr>
+            <tr><td data-label="과정">AI활용지도사 2급 자격증반</td><td data-label="정가"><del>55만원</del></td><td data-label="할인가" class="now">39만원</td><td data-label="무이자 5개월">월 7.8만원</td><td data-label="현금 결제">37만원</td></tr>
+            <tr><td data-label="과정">AI활용지도사 1급 자격증반</td><td data-label="정가"><del>66만원</del></td><td data-label="할인가" class="now">44만원</td><td data-label="무이자 5개월">월 8.8만원</td><td data-label="현금 결제">42만원</td></tr>
+            <tr><td data-label="과정">1:1 이력서 · 면접 컨설팅</td><td data-label="정가"><del>33만원</del></td><td data-label="할인가" class="now">20만원</td><td data-label="무이자 5개월">월 4만원</td><td data-label="현금 결제">19만원</td></tr>
+            <tr class="hl"><td data-label="과정"><b>올인원 AI강사되기</b> (2급+1급+면접)</td><td data-label="정가"><del>140만원</del></td><td data-label="할인가" class="now">89만원</td><td data-label="무이자 5개월">월 17.8만원</td><td data-label="현금 결제">85만원</td></tr>
           </tbody>
         </table>
       </div>
@@ -431,7 +447,7 @@
       <h2>첫 번째 계단이 준비되었습니다</h2>
       <p>2026년, 하루 3시간 일하는 삶. 그 시작은 오늘 ‘준비된 콘텐츠’를 손에 쥐는 것입니다.</p>
       <div class="btn-row">
-        <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab" href="https://store.kakao.com/dreamlab">카카오 스토어에서 신청</a>
+        <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab" href="https://store.kakao.com/dreamlab" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
         <a class="btn btn-line" href="sms:01067798833">문자로 상담하기</a>
       </div>
     </div>

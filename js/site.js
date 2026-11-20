@@ -56,12 +56,12 @@
       "<div><img class=\"foot-logo\" src=\"img/dreamlab-logo.jpg\" width=\"120\" height=\"120\" alt=\"드림랩 로고\"><h4>한국AI활용지도사교육연구협회</h4><p>경력을 쉬었던 분, 은퇴 후 인생 2막을 준비하는 분이<br>AI강사와 크리에이터로 다시 일하도록 돕습니다.</p></div>" +
       "<div><h4>바로가기</h4><ul>" + MENU.map(function (m) { return '<li><a href="' + m[0] + '">' + m[1] + "</a></li>"; }).join("") + "</ul></div>" +
       "<div><h4>채널</h4><ul>" +
-      '<li><a href="' + LINKS.youtube + '">유튜브 · 드림랩</a></li>' +
-      '<li><a href="' + LINKS.blog + '">네이버 블로그</a></li>' +
-      '<li><a href="' + LINKS.kakaoChannel + '">드림랩 카카오톡 채널</a></li>' +
-      '<li><a href="' + LINKS.openChat + '">드림랩 오픈톡방</a></li>' +
-      '<li><a href="' + LINKS.tiktok + '">틱톡</a></li>' +
-      '<li><a href="' + LINKS.lectureSite + '">드림랩 강의실</a></li>' +
+      '<li><a href="' + LINKS.youtube + '" target="_blank" rel="noopener">유튜브 · 드림랩</a></li>' +
+      '<li><a href="' + LINKS.blog + '" target="_blank" rel="noopener">네이버 블로그</a></li>' +
+      '<li><a href="' + LINKS.kakaoChannel + '" target="_blank" rel="noopener">드림랩 카카오톡 채널</a></li>' +
+      '<li><a href="' + LINKS.openChat + '" target="_blank" rel="noopener">드림랩 오픈톡방</a></li>' +
+      '<li><a href="' + LINKS.tiktok + '" target="_blank" rel="noopener">틱톡</a></li>' +
+      '<li><a href="' + LINKS.lectureSite + '" target="_blank" rel="noopener">드림랩 강의실</a></li>' +
       "</ul></div></div>" +
       '<div class="foot-legal">' +
       '<div class="legal-block"><h5>한국AI활용지도사교육연구협회 <em>비영리 단체</em></h5><ul>' +
@@ -84,8 +84,8 @@
     dock.className = "dock";
     var custom = dock.getAttribute("data-buttons");
     dock.innerHTML = '<div class="wrap">' + (custom ||
-      ('<a class="btn btn-primary" href="' + LINKS.freeClass + '">무료특강 신청</a>' +
-       '<a class="btn btn-kakao" href="' + LINKS.kakaoChannel + '"><span class="lbl-lg">채널 추가하고 소식받기</span><span class="lbl-sm">카톡 소식받기</span></a>')) + "</div>";
+      ('<a class=\"btn btn-primary\" href=\"' + LINKS.freeClass + '\" target=\"_blank\" rel=\"noopener\">무료특강 신청</a>' +
+       '<a class=\"btn btn-kakao\" href=\"' + LINKS.kakaoChannel + '\" target=\"_blank\" rel=\"noopener\"><span class="lbl-lg">채널 추가하고 소식받기</span><span class="lbl-sm">카톡 소식받기</span></a>')) + "</div>";
   }
 
   /* 카카오 스토어 신청 버튼 */
@@ -133,7 +133,11 @@
     });
   }
 
-  /* 바깥 사이트로 가는 링크는 새 창으로 (홈페이지 안 이동은 그대로) */
+  /* 바깥 사이트로 가는 링크는 새 창으로 (홈페이지 안 이동은 그대로) — 나중에 생긴 링크까지 클릭 순간에 한 번 더 확인 */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[href]"); if (!a) return;
+    if (/^https?:/.test(a.getAttribute("href") || a.href) && a.hostname && a.hostname !== location.hostname) { a.target = "_blank"; a.rel = "noopener"; }
+  }, true);
   document.querySelectorAll('a[href^="http"]').forEach(function (a) {
     if (a.hostname && a.hostname !== location.hostname) { a.target = "_blank"; a.rel = "noopener"; }
   });
