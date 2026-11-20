@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>유튜브 쇼핑쇼츠 크리에이터 부트캠프 · 한국AI활용지도사교육연구협회</title>
+<meta name="description" content="구독자 500명부터 시작하는 유튜브 쇼핑. 4가지 쇼핑쇼츠 유형 중 나에게 맞는 무기를 찾고, 7일 만에 첫 영상을 올리는 크리에이터 부트캠프.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  :root { --yt: #e62117; }
+  .red { color: var(--yt); }
+
+  /* ---------- 첫 화면 ---------- */
+  .ss-hero { padding: 72px 0 84px; overflow: hidden; }
+  .ss-hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .ss-hero h1 { margin: 14px 0 20px; }
+  .ss-hero h1 em { font-style: normal; color: var(--yt); }
+  .ss-hero .lead { font-size: 1.08rem; color: var(--ink-soft); max-width: 31em; margin-bottom: 28px; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero-stats div { background: var(--card); border-radius: 14px; padding: 14px 18px; box-shadow: 0 6px 16px rgba(15,35,80,.07); }
+  .hero-stats b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--brand); line-height: 1.1; }
+  .hero-stats span { font-size: .78rem; color: var(--ink-soft); }
+  .btn-yt { background: var(--yt); color: #fff; }
+
+  /* 휴대폰 속 쇼츠 */
+  .phone-stage { position: relative; justify-self: center; width: 100%; max-width: 420px; aspect-ratio: 1; }
+  .phone-stage .glow { position: absolute; inset: 6%; border-radius: 50%; background: conic-gradient(from 90deg, #ff4d4d, #ffd84d, #4ff3d6, #2350b0, #ff4d4d); filter: blur(2px); opacity: .85; animation: spin 24s linear infinite; }
+  .phone { position: absolute; left: 50%; top: 4%; width: 46%; aspect-ratio: 9/18.5; margin-left: -23%; background: #0b0f1a; border-radius: 34px; padding: 10px; box-shadow: 0 30px 50px rgba(15,35,80,.35); }
+  .screen { position: relative; width: 100%; height: 100%; border-radius: 26px; overflow: hidden; background: #fff; }
+  .sc { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease, transform .5s ease; transform: translateX(14px); }
+  .s1 .sc1, .s2 .sc2, .s3 .sc3 { opacity: 1; transform: none; }
+  .sc1 img { width: 100%; height: 100%; object-fit: cover; object-position: 47% 50%; }
+  .tagbar { position: absolute; left: 8px; right: 8px; bottom: 12px; background: rgba(255,255,255,.95); border-radius: 10px; padding: 7px 9px; display: flex; gap: 6px; align-items: center; font-size: .66rem; font-weight: 800; color: #16233a; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+  .tagbar b { margin-left: auto; }
+  .tagbar i { width: 18px; height: 18px; border-radius: 5px; background: var(--yt); flex: none; position: relative; }
+  .tagbar i::after { content: ""; position: absolute; left: 7px; top: 5px; border-left: 6px solid #fff; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+  .tap { position: absolute; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,216,77,.55); border: 2px solid #fff; box-shadow: 0 0 0 0 rgba(255,216,77,.7); opacity: 0; }
+  .tap.t1 { left: 46%; bottom: 8px; } .tap.t2 { left: 44%; bottom: 14px; }
+  .s1 .t1, .s2 .t2 { animation: tap 1s 1.2s ease-out both; }
+  @keyframes tap { 0% { opacity: 0; transform: scale(.4); } 30% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255,216,77,.7); } 100% { opacity: 0; transform: scale(1.1); box-shadow: 0 0 0 16px rgba(255,216,77,0); } }
+  .cp-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid #eee; font-size: .7rem; }
+  .cp-head b { font-size: .95rem; color: #e52528; letter-spacing: -.02em; }
+  .cp-img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .cp-body { padding: 8px 12px; display: grid; gap: 2px; }
+  .cp-name { font-size: .7rem; font-weight: 700; color: #16233a; line-height: 1.35; }
+  .cp-price { font-size: .66rem; color: #888; } .cp-price b { color: #e52528; font-size: .86rem; }
+  .cp-ship { font-size: .58rem; color: #2e7d32; font-weight: 700; }
+  .cp-buy { position: absolute; left: 10px; right: 10px; bottom: 12px; background: #346aff; color: #fff; border-radius: 8px; text-align: center; font-weight: 800; font-size: .78rem; padding: 8px 0; }
+  .sc3 { background: linear-gradient(170deg, #0f2350, #1b3a7c); color: #fff; display: grid; place-items: center; text-align: center; }
+  .paid { display: grid; justify-items: center; gap: 2px; padding: 0 10px; }
+  .paid-coin { width: 54px; height: 54px; border-radius: 50%; background: var(--marker); color: var(--brand-deep); font-weight: 800; font-size: 1.5rem; display: grid; place-items: center; box-shadow: 0 6px 16px rgba(0,0,0,.3); margin-bottom: 8px; }
+  .s3 .paid-coin { animation: coin 1s ease-out both; }
+  @keyframes coin { 0% { transform: translateY(-60px) rotateY(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: translateY(0) rotateY(360deg); } }
+  .paid small { font-size: .62rem; color: #b9c5e0; }
+  .paid b { font-size: .95rem; line-height: 1.3; }
+  .paid b em { font-style: normal; color: var(--marker); font-size: 1.5rem; display: block; }
+  .paid p { font-size: .78rem; font-weight: 700; color: #ffd9d6; }
+  .noti { position: absolute; left: 8px; right: 8px; top: 12px; background: rgba(255,255,255,.95); color: #16233a; border-radius: 12px; padding: 7px 9px; font-size: .56rem; text-align: left; line-height: 1.4; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+  .noti b { display: block; font-size: .64rem; }
+  .s3 .noti { animation: noti .6s .5s ease-out both; }
+  @keyframes noti { from { transform: translateY(-40px); opacity: 0; } }
+  .demo { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-size: .54rem; color: #8fa0c8; }
+  .coin { position: absolute; background: #fff; border-radius: 14px; padding: 9px 14px; font-weight: 800; font-size: .82rem; box-shadow: 0 10px 22px rgba(15,35,80,.18); white-space: nowrap; border: 2px solid var(--line); transition: transform .3s, border-color .3s, box-shadow .3s; }
+  .coin small { display: block; font-weight: 500; font-size: .66rem; color: var(--ink-soft); }
+  .coin.c1 { left: 0; top: 16%; } .coin.c2 { right: -2%; top: 38%; } .coin.c3 { left: 2%; bottom: 14%; }
+  .coin.on { border-color: var(--yt); transform: scale(1.08); box-shadow: 0 14px 28px rgba(230,33,23,.25); }
+  .coin.c3.on { background: var(--yt); color: #fff; } .coin.c3.on small { color: #ffe1df; }
+  .phone-stage .lamp { position: absolute; right: 2%; bottom: 0; width: 22%; animation: bob 3.4s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(15,35,80,.25)); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .phone-stage * { animation: none !important; } }
+  @media (max-width: 860px) { .ss-hero .wrap { grid-template-columns: 1fr; } .phone-stage { max-width: 340px; } }
+
+  /* ---------- 왜 지금 ---------- */
+  .now-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: stretch; }
+  .drop { background: var(--brand-deep); color: #e7ecf7; border-radius: 22px; padding: 30px; }
+  .drop h3 { color: #fff; margin-bottom: 18px; }
+  .bars { display: grid; gap: 14px; }
+  .bar { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; font-size: .86rem; }
+  .bar .track { height: 34px; background: rgba(255,255,255,.08); border-radius: 8px; overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding: 0 12px; font-weight: 800; white-space: nowrap; transform-origin: left; transition: transform 1.2s ease; }
+  .bar.b1 .fill { width: 100%; background: #5a6a92; } .bar.b2 .fill { width: 10%; min-width: 120px; background: var(--marker); color: var(--brand-deep); }
+  .motion .bars:not(.in) .fill { transform: scaleX(0); }
+  .drop .src { margin-top: 16px; font-size: .74rem; color: #9fb0d6; }
+  .drop .src a { color: #c9d3ea; }
+  .no-need { background: var(--card); border-radius: 22px; padding: 30px; display: grid; gap: 14px; align-content: center; }
+  .no-need b { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.45; }
+  .no-need ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .no-need li { display: flex; gap: 10px; align-items: center; font-weight: 500; }
+  .no-need li::before { content: "✕"; color: var(--yt); font-weight: 800; }
+  .no-need p { color: var(--ink-soft); font-size: .92rem; }
+  @media (max-width: 860px) { .now-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- 돈 버는 6가지 ---------- */
+  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .way { background: var(--card); border-radius: 18px; padding: 22px; box-shadow: 0 6px 16px rgba(15,35,80,.06); display: grid; gap: 6px; align-content: start; }
+  .way .ic { font-size: 1.6rem; }
+  .way b { font-size: 1.05rem; }
+  .way p { font-size: .86rem; color: var(--ink-soft); }
+  .way.hl { background: var(--yt); color: #fff; box-shadow: 0 14px 30px rgba(230,33,23,.3); }
+  .way.hl p { color: #ffe1df; }
+  @media (max-width: 860px) { .ways { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .ways { grid-template-columns: 1fr; } }
+
+  /* ---------- 4대 유형 ---------- */
+  .types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .type { background: var(--card); border-radius: 20px; padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; border-top: 6px solid var(--brand); box-shadow: 0 6px 16px rgba(15,35,80,.06); }
+  .type.t1 { border-top-color: #20bfa3; } .type.t2 { border-top-color: #f5b301; } .type.t3 { border-top-color: var(--yt); } .type.t4 { border-top-color: var(--brand); }
+  .type small { font-weight: 800; letter-spacing: .08em; font-size: .72rem; color: var(--ink-soft); }
+  .type h3 { font-size: 1.2rem; }
+  .type .one { font-size: .88rem; color: var(--ink-soft); }
+  .meter { display: grid; gap: 6px; font-size: .78rem; margin-top: 4px; }
+  .meter div { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: center; }
+  .meter i { display: block; height: 8px; border-radius: 99px; background: #e8ecf3; overflow: hidden; position: relative; }
+  .meter i::after { content: ""; position: absolute; inset: 0; width: var(--v); border-radius: 99px; background: var(--c, var(--brand)); }
+  .type .tag { margin-top: auto; font-size: .78rem; font-weight: 700; padding: 6px 10px; border-radius: 10px; background: var(--blueprint); color: var(--brand-deep); }
+  .type.t3 .tag { background: #ffe8e6; color: #b3170f; }
+  .type.t2 .tag { background: #fff4d1; color: #7a5900; }
+  .type-note { margin-top: 18px; font-size: .84rem; color: var(--ink-soft); }
+  @media (max-width: 1000px) { .types { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .types { grid-template-columns: 1fr; } }
+
+  /* ---------- 나에게 맞는 유형 진단 ---------- */
+  .quiz { background: var(--card); border-radius: 24px; padding: clamp(22px, 4vw, 40px); box-shadow: 0 20px 50px rgba(15,35,80,.1); border-top: 8px solid var(--yt); max-width: 860px; }
+  .q { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+  .q b { display: block; font-size: 1.02rem; }
+  .q span { font-size: .82rem; color: var(--ink-soft); }
+  .yn { display: flex; gap: 8px; }
+  .yn button { font: inherit; font-weight: 700; font-size: .92rem; min-width: 74px; min-height: 46px; border-radius: 12px; border: 2px solid var(--line); background: #fbfcfe; cursor: pointer; }
+  .yn button[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .result { margin-top: 22px; border-radius: 18px; padding: 22px 24px; background: var(--blueprint); display: none; }
+  .result.show { display: block; animation: pop .4s ease; }
+  .result small { font-weight: 700; color: var(--brand); }
+  .result h3 { margin: 4px 0 8px; }
+  .result p { color: var(--ink-soft); font-size: .92rem; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px); } }
+  @media (max-width: 560px) { .q { grid-template-columns: 1fr; } }
+
+  /* ---------- 2단계 로드맵 ---------- */
+  .stages { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; }
+  .stage { border-radius: 22px; padding: 28px; }
+  .stage.s1 { background: var(--card); border: 2px solid var(--brand); }
+  .stage.s2 { background: var(--brand-deep); color: #e7ecf7; }
+  .stage small { font-weight: 800; font-size: .76rem; letter-spacing: .06em; }
+  .stage.s1 small { color: var(--brand); } .stage.s2 small { color: var(--marker); }
+  .stage h3 { margin: 6px 0 12px; } .stage.s2 h3 { color: #fff; }
+  .stage ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: .92rem; }
+  .stage .motto { margin-top: 14px; font-weight: 700; font-size: .9rem; }
+  .stages .arrow { align-self: center; font-size: 2rem; font-weight: 800; color: var(--yt); }
+  @media (max-width: 760px) { .stages { grid-template-columns: 1fr; } .stages .arrow { transform: rotate(90deg); justify-self: center; } }
+
+  /* ---------- 500명 전 수익화 ---------- */
+  .early { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .ea { background: var(--card); border-radius: 18px; padding: 22px 20px; display: grid; gap: 8px; align-content: start; box-shadow: 0 6px 16px rgba(15,35,80,.06); }
+  .ea .no { font-family: var(--font-display); font-weight: 800; color: var(--yt); }
+  .ea b { font-size: 1.05rem; }
+  .ea p { font-size: .86rem; color: var(--ink-soft); }
+  .ea .rate { font-weight: 800; color: var(--brand-deep); font-size: .9rem; }
+  .early-note { margin-top: 14px; font-size: .78rem; color: var(--ink-soft); }
+  @media (max-width: 960px) { .early { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .early { grid-template-columns: 1fr; } }
+
+  /* ---------- 7일 플랜 ---------- */
+  .days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: d; }
+  .day { background: var(--card); border-radius: 18px; padding: 22px 20px; position: relative; box-shadow: 0 6px 16px rgba(15,35,80,.06); }
+  .day .d { display: inline-block; font-weight: 800; font-size: .76rem; color: #fff; background: var(--brand); border-radius: 999px; padding: 3px 12px; margin-bottom: 10px; }
+  .day b { display: block; font-size: 1.05rem; margin-bottom: 8px; }
+  .day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: .84rem; color: var(--ink-soft); }
+  .day li::before { content: "✓ "; color: #20bfa3; font-weight: 800; }
+  .day.last { grid-column: 1 / -1; background: var(--yt); color: #fff; display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: center; }
+  .day.last .d { background: #fff; color: var(--yt); margin: 0; }
+  .day.last b { margin: 0; }
+  .day.last ul { grid-column: 1 / -1; color: #ffe1df; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .day.last li::before { color: #fff; }
+  @media (max-width: 960px) { .days { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .days { grid-template-columns: 1fr; } }
+
+  /* ---------- 특전 · 수강료 ---------- */
+  .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .perk { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: 18px; padding: 22px; display: grid; gap: 6px; align-content: start; }
+  .perk small { color: var(--marker); font-weight: 800; font-size: .74rem; letter-spacing: .06em; }
+  .perk b { color: #fff; font-size: 1.08rem; }
+  .perk p { font-size: .86rem; color: #c9d3ea; }
+  .perk .val { margin-top: 6px; font-weight: 800; color: #fff; }
+  .perk .val em { font-style: normal; color: var(--marker); font-family: var(--font-display); font-size: 1.3rem; }
+  .price-sec { background: linear-gradient(135deg, #0f2350, #1b3a7c); color: #e7ecf7; }
+  .price-sec h2 { color: #fff; }
+  .price-sec .eyebrow { color: var(--marker); }
+  .price-sec .section-head p { color: #c9d3ea; }
+  .price-box { margin-top: 32px; background: #fff; color: var(--ink); border-radius: 26px; padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; box-shadow: 0 24px 50px rgba(0,0,0,.3); }
+  .price-box .total { font-size: .9rem; color: var(--ink-soft); }
+  .price-box .total del { font-weight: 700; }
+  .price-box .big { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.8rem, 7vw, 3.8rem); color: var(--yt); line-height: 1.1; }
+  .price-box .big small { font-size: 1.3rem; }
+  .price-box .sub { font-size: .92rem; color: var(--ink-soft); }
+  .price-box .cash { margin-top: 10px; display: inline-block; background: #fff4d1; border-radius: 10px; padding: 8px 14px; font-weight: 700; font-size: .92rem; }
+  .price-box .btns { display: grid; gap: 10px; }
+  .price-box .btns .btn { width: 100%; }
+  .price-box .card-note { font-size: .78rem; color: var(--ink-soft); }
+  @media (max-width: 860px) { .perks { grid-template-columns: 1fr 1fr; } .price-box { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .perks { grid-template-columns: 1fr; } }
+
+  .final { background: var(--yt); color: #fff; text-align: center; padding: 80px 0; }
+  .final h2 { color: #fff; }
+  .final p { color: #ffe1df; margin: 14px auto 28px; max-width: 34em; }
+  .final .btn-row { justify-content: center; }
+  .final .btn-line { background: transparent; color: #fff; border-color: #fff; }
+  /* ---------- 영상 ---------- */
+  .vid-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 44px; align-items: center; }
+  .vid { position: relative; display: block; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; box-shadow: 0 18px 40px rgba(15,35,80,.25); transition: transform .3s; }
+  .vid:hover { transform: translateY(-4px); }
+  .vid img { width: 100%; height: 100%; object-fit: cover; }
+  .vid-play { position: absolute; left: 50%; top: 50%; width: 84px; height: 60px; margin: -30px 0 0 -42px; background: var(--yt); border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,.35); transition: transform .2s; }
+  .vid-play::after { content: ""; position: absolute; left: 33px; top: 17px; border-left: 24px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+  .vid:hover .vid-play { transform: scale(1.1); }
+  .vid-watch { position: absolute; left: 14px; bottom: 14px; background: rgba(0,0,0,.7); color: #fff; font-size: .8rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+  .vid-grid h2 { margin: 10px 0 14px; }
+  .vid-txt { color: var(--ink-soft); margin-bottom: 22px; }
+  @media (max-width: 860px) { .vid-grid { grid-template-columns: 1fr; gap: 26px; } }
+</style>
+</head>
+<body>
+<header id="site-head"></header>
+
+<main>
+  <!-- 첫 화면 -->
+  <section class="ss-hero blueprint-bg">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">유튜브 쇼핑쇼츠 크리에이터 부트캠프</p>
+        <h1>최저가도, 상위노출도<br>필요 없습니다.<br><em>쇼츠 하나가 매장</em>이 됩니다</h1>
+        <p class="lead">무자본·무재고로 시작하는 숏폼 커머스. 4가지 쇼핑쇼츠 유형 중 나에게 맞는 무기를 찾고, 7일 만에 첫 영상을 올립니다. 컴퓨터가 낯선 50·60대도 따라올 수 있게 차근차근 알려 드립니다.</p>
+        <div class="btn-row">
+          <a class="btn btn-yt" href="#price">부트캠프 신청 안내</a>
+          <a class="btn btn-line" href="#quiz">나에게 맞는 유형 찾기</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>구독자 500명</b><span>부터 쇼핑 태그 가능</span></div>
+          <div><b>약 15%</b><span>평균 제휴 수수료</span></div>
+          <div><b>총 4회</b><span>+ 3개월 밀착 피드백</span></div>
+        </div>
+      </div>
+      <div class="phone-stage reveal" role="img" aria-label="쇼핑쇼츠에서 제품 보기를 누르면 쿠팡으로 이동하고, 구매가 일어나면 수수료가 내 통장에 들어오는 과정 예시">
+        <div class="glow"></div>
+        <div class="phone" id="flow-phone"><div class="screen">
+          <div class="sc sc1"><img src="img/ss-shorts1.jpg" width="804" height="1000" alt=""><div class="tagbar"><i></i>제품 보기 <b>›</b></div><span class="tap t1"></span></div>
+          <div class="sc sc2">
+            <div class="cp-head"><b>쿠팡</b><span>🔍 🛒</span></div>
+            <img class="cp-img" src="img/ss-product.jpg" width="380" height="360" alt="">
+            <div class="cp-body"><p class="cp-name">주방 틈새 접이식 수납함</p><p class="cp-price"><del>29,900원</del> <b>19,900원</b></p><p class="cp-ship">내일 도착 보장 · 무료배송</p><span class="cp-buy">구매하기</span></div><span class="demo" style="bottom:auto;top:44px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)">예시 화면</span>
+            <span class="tap t2"></span>
+          </div>
+          <div class="sc sc3">
+            <div class="paid"><span class="paid-coin">₩</span><small>파트너스 수수료 적립</small><b>판매금액의 <em>9%~</em></b><p>내 통장으로 쏙!</p></div>
+            <div class="noti"><b>💰 수익 알림</b>오늘 2건 구매 발생 · 수수료 정산 예정</div>
+            <span class="demo">예시 화면</span>
+          </div>
+        </div></div>
+        <span class="coin c1" data-step="1">① 쇼츠에서<small>'제품 보기' 클릭</small></span>
+        <span class="coin c2" data-step="2">② 쿠팡에서 구매<small>판매·배송은 쿠팡이</small></span>
+        <span class="coin c3" data-step="3">③ 수수료 9%~<small>내 통장에 쏙</small></span>
+        <img class="lamp" src="img/genie-lamp.webp" width="255" height="456" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 왜 지금 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">왜 바로 지금인가?</p>
+        <h2>유튜브 쇼핑, 지금이 <span class="mark">새로운 확장기</span>입니다</h2>
+        <p>쇼핑 태그를 달 수 있는 문턱이 크게 낮아졌습니다. 큰 채널이 아니어도 첫 수익을 만들 수 있는 시기입니다.</p>
+      </div>
+      <div class="now-grid">
+        <div class="drop reveal">
+          <h3>쇼핑 제휴 프로그램 참여 구독자 기준</h3>
+          <div class="bars on-view">
+            <div class="bar b1"><span>예전</span><div class="track"><div class="fill">구독자 1만 명</div></div></div>
+            <div class="bar b2"><span>2026년 3월~</span><div class="track"><div class="fill">500명</div></div></div>
+          </div>
+          <p class="src">※ 2026년 3월 30일 유튜브 발표 기준 · 유튜브 파트너 프로그램(YPP) 가입 요건 충족 필요 · 정책은 바뀔 수 있습니다. (<a href="https://www.khan.co.kr/article/202604051625001" target="_blank" rel="noopener">관련 기사</a>)</p>
+        </div>
+        <div class="no-need reveal" data-delay="1">
+          <b>쿠팡·스마트스토어 셀러처럼<br>경쟁하지 않아도 됩니다</b>
+          <ul><li>최저가 경쟁</li><li>상위노출 광고비</li><li>검색 키워드 선점</li><li>재고·배송·CS</li></ul>
+          <p>좋은 제품을 재미있게 보여 주는 영상 하나면 충분합니다. 판매·배송은 쇼핑몰이 하고, 나는 수수료를 받습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 돈 버는 6가지 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">유튜브 기본은 알고 가자</p>
+        <h2>유튜브로 돈 버는 6가지 방법</h2>
+        <p>그중 초보가 가장 빨리 첫 수익을 내는 길이 <b class="red">제휴 마케팅(쇼핑)</b>입니다.</p>
+      </div>
+      <div class="ways">
+        <div class="way reveal"><span class="ic">▶️</span><b>조회수 수익</b><p>애드센스 광고 수익. 쇼츠는 조회당 약 0.25~0.5원, 롱폼은 1~2원 수준입니다.</p></div>
+        <div class="way reveal" data-delay="1"><span class="ic">🤝</span><b>광고 · 협찬</b><p>브랜드 콘텐츠, PPL, 제품 협찬. 채널이 신뢰를 얻으면 제안이 들어옵니다.</p></div>
+        <div class="way reveal" data-delay="2"><span class="ic">🏪</span><b>내 사업 마케팅</b><p>내 가게·서비스·강의를 알리는 개인 브랜딩 채널로 활용합니다.</p></div>
+        <div class="way hl reveal"><span class="ic">🛍️</span><b>제휴 마케팅 (쇼핑)</b><p>유튜브 쇼핑, 쿠팡 파트너스, 네이버 브랜드커넥트 등. 영상 속 링크로 구매가 생기면 수수료를 받습니다.</p></div>
+        <div class="way reveal" data-delay="1"><span class="ic">💛</span><b>멤버십 · 후원</b><p>회원 전용 영상, 매월 정기 결제, 슈퍼챗과 직접 후원.</p></div>
+        <div class="way reveal" data-delay="2"><span class="ic">🎓</span><b>지식 상품</b><p>쌓인 노하우로 강의·전자책·컨설팅을 만들어 판매합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4대 유형 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">4대 유형 한눈에 보기</p>
+        <h2>쇼핑쇼츠, 나만의 무기를 고르세요</h2>
+        <p>유형마다 강점과 위험이 다릅니다. 내 시간·자본·성향에 맞는 방식을 고르는 것이 첫걸음입니다.</p>
+      </div>
+      <div class="types">
+        <article class="type t1 reveal">
+          <small>TYPE 01</small><h3>직접 촬영형</h3>
+          <p class="one">직접 써 보고 찍는 찐 후기. 가장 오래 살아남는 롱런의 정석.</p>
+          <div class="meter">
+            <div>신뢰·전환<i style="--v:90%;--c:#20bfa3"></i></div>
+            <div>저작권 안전<i style="--v:100%;--c:#20bfa3"></i></div>
+            <div>제작 시간<i style="--v:85%;--c:#e5383b"></i></div>
+          </div>
+          <span class="tag">🎬 롱런 · 자산화 최적 · 브랜드 협찬 확장</span>
+        </article>
+        <article class="type t2 reveal" data-delay="1">
+          <small>TYPE 02</small><h3>해외 영상 편집형</h3>
+          <p class="one">해외 제품 영상에 컷 편집과 AI 더빙을 입히는 빠르고 가벼운 부업 모델.</p>
+          <div class="meter">
+            <div>제작 속도<i style="--v:100%;--c:#20bfa3"></i></div>
+            <div>수익 전환<i style="--v:50%;--c:#f5b301"></i></div>
+            <div>저작권 위험<i style="--v:90%;--c:#e5383b"></i></div>
+          </div>
+          <span class="tag">🌏 속도·물량 승부 · 사용 허락된 소스만 써야 안전</span>
+        </article>
+        <article class="type t3 reveal" data-delay="2">
+          <small>TYPE 03</small><h3>연예인 활용형</h3>
+          <p class="one">유명인이 쓴 제품을 소개해 팬덤의 힘을 빌리는 하이리스크 하이리턴.</p>
+          <div class="meter">
+            <div>수익 전환<i style="--v:100%;--c:#20bfa3"></i></div>
+            <div>계정 정지 위험<i style="--v:95%;--c:#e5383b"></i></div>
+            <div>소재 찾기<i style="--v:80%;--c:#e5383b"></i></div>
+          </div>
+          <span class="tag">⚠️ 초상권·저작권 위험 최대 · 메인 채널 금지</span>
+        </article>
+        <article class="type t4 reveal">
+          <small>TYPE 04</small><h3>지식 정보 전달형</h3>
+          <p class="one">꿀팁·정보로 먼저 가치를 주고 자연스럽게 제품을 연결하는 영리한 방식.</p>
+          <div class="meter">
+            <div>시청자 호감<i style="--v:95%;--c:#20bfa3"></i></div>
+            <div>이중 수익<i style="--v:85%;--c:#20bfa3"></i></div>
+            <div>기획 난이도<i style="--v:90%;--c:#e5383b"></i></div>
+          </div>
+          <span class="tag">💡 브랜딩 최적 · 조회수 + 제휴 이중 수익</span>
+        </article>
+      </div>
+      <p class="type-note reveal">※ 하나만 고를 필요는 없습니다. 메인 채널은 안전한 유형으로, 실험은 서브 채널로 나누는 이원 구조가 위험을 줄입니다. 협회는 저작권과 초상권을 지키는 방법을 원칙으로 가르칩니다.</p>
+    </div>
+  </section>
+
+  <!-- 진단 -->
+  <section class="section blueprint-bg" id="quiz">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">1분 자가 진단</p>
+        <h2>나는 어떤 유형에 맞을까?</h2>
+        <p>네 가지 질문에 답하면 나에게 맞는 출발점을 알려 드립니다.</p>
+      </div>
+      <div class="quiz reveal">
+        <div class="q" data-k="time"><div><b>Q1. 매일 촬영·편집할 시간이 있나요?</b><span>일주일에 15시간 이상 낼 수 있는지가 첫 갈림길입니다.</span></div><div class="yn"><button type="button" data-v="1" aria-pressed="false">네</button><button type="button" data-v="0" aria-pressed="false">아니요</button></div></div>
+        <div class="q" data-k="speed"><div><b>Q2. 빠른 수익이 급한가요?</b><span>3개월 안의 성과 vs 1년 이상 내다보는 자산화</span></div><div class="yn"><button type="button" data-v="1" aria-pressed="false">네</button><button type="button" data-v="0" aria-pressed="false">아니요</button></div></div>
+        <div class="q" data-k="expert"><div><b>Q3. 잘 아는 분야가 있나요?</b><span>업계 경험, 오래된 취미, 자격증 — 무엇이든 좋습니다.</span></div><div class="yn"><button type="button" data-v="1" aria-pressed="false">네</button><button type="button" data-v="0" aria-pressed="false">아니요</button></div></div>
+        <div class="q" data-k="face"><div><b>Q4. 얼굴이나 목소리를 보여도 괜찮나요?</b><span>손이나 제품만 나와도 촬영은 가능합니다.</span></div><div class="yn"><button type="button" data-v="1" aria-pressed="false">네</button><button type="button" data-v="0" aria-pressed="false">아니요</button></div></div>
+        <div class="result" id="quiz-result" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2단계 루트 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">부트캠프 2단계 루트</p>
+        <h2>실행력의 Stage 1에서<br>자산화의 Stage 2로</h2>
+      </div>
+      <div class="stages">
+        <div class="stage s1 reveal"><small>STAGE 1 · 1~3개월</small><h3>감각 익히기 · 첫 수익 맛보기</h3>
+          <ul><li>영상 편집·업로드 감각 바로 익히기</li><li>첫 수익화 달성으로 자신감 확보</li><li>알고리즘과 트렌드 데이터 공부</li></ul>
+          <p class="motto">⚡ 완벽한 기획은 나중, 지금은 “업로드”</p></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="stage s2 reveal" data-delay="1"><small>STAGE 2 · 3~12개월+</small><h3>롱런 채널 · 자산 만들기</h3>
+          <ul><li>직접 촬영형·지식 정보형으로 나만의 브랜드</li><li>조회수 + 제휴 이중 수익, 협찬 확장</li><li>저작권 안전지대에서 삭제 걱정 없이</li></ul>
+          <p class="motto">✅ 브랜딩과 신뢰가 전부 — 콘텐츠 품질로 승부</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 500명 전 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">구독자 500명 전에도</p>
+        <h2>채널이 작아도 오늘부터 할 수 있는 수익화</h2>
+        <p>유튜브 쇼핑 자격을 기다리는 동안, 다른 제휴 프로그램으로 먼저 수익 구조를 연습합니다.</p>
+      </div>
+      <div class="early">
+        <div class="ea reveal"><span class="no">01</span><b>쿠팡 파트너스</b><p>인포크링크·링크트리에 상품 링크를 모아 유튜브·블로그·인스타에 연결합니다.</p><span class="rate">SNS 링크 기본 수수료 3%</span></div>
+        <div class="ea reveal" data-delay="1"><span class="no">02</span><b>네이버 클립 + 브랜드커넥트</b><p>네이버 스토어 상품을 클립·블로그와 함께 운영해 수수료를 받습니다.</p><span class="rate">수수료 5~23% · 장바구니 7일 인정</span></div>
+        <div class="ea reveal" data-delay="2"><span class="no">03</span><b>토스 쇼핑</b><p>토스 쇼핑 상품을 공유해 구매가 생기면 수익을 받는 방법입니다.</p><span class="rate">채널 규모와 무관하게 시작</span></div>
+        <div class="ea reveal"><span class="no">04</span><b>카페24 쇼핑몰</b><p>유튜브 쇼핑을 넘어, 내 쇼핑몰을 열어 직접 판매하는 단계입니다.</p><span class="rate">수수료가 아닌 내 매출</span></div>
+      </div>
+      <p class="early-note">※ 수수료율은 특강 자료 기준이며 각 프로그램 정책과 상품에 따라 달라집니다.</p>
+    </div>
+  </section>
+
+  <!-- 지니쌤 한마디 -->
+  <section class="genie-say">
+    <div class="wrap">
+      <img class="reveal" src="img/genie-character.jpg" width="900" height="900" alt="손을 가슴에 얹고 안내하는 지니쌤 캐릭터">
+      <p class="say reveal" data-delay="1">저도 의심했어요.<br>그래서 쇼핑쇼츠 9개를 직접 올려 봤고,<br>1년이 지난 지금도 수익이 들어옵니다.<small>고현미(지니쌤)의 한마디</small></p>
+    </div>
+  </section>
+
+  <!-- 영상 -->
+  <section class="section">
+    <div class="wrap vid-grid">
+      <a class="vid reveal" href="https://youtu.be/M1g0cAbAKpg" target="_blank" rel="noopener" aria-label="유튜브에서 쇼핑쇼츠 영상 보기"><img src="img/yt-thumb.jpg" width="1280" height="720" alt="유튜브 영상 썸네일: 쇼핑쇼츠로 돈 벌기" loading="lazy"><span class="vid-play" aria-hidden="true"></span><span class="vid-watch">영상 바로 보기</span></a>
+      <div class="reveal" data-delay="1">
+        <p class="eyebrow">영상으로 먼저 확인하세요</p>
+        <h2>쇼핑쇼츠, 정말 돈이 될까?</h2>
+        <p class="vid-txt">캡컷(CapCut)으로 쇼핑쇼츠를 만들어 수익을 내는 방법, 지니쌤이 영상으로 먼저 알려 드립니다. 부트캠프를 신청하기 전에 직접 보고 판단하세요.</p>
+        <a class="btn btn-yt" href="https://youtu.be/M1g0cAbAKpg" target="_blank" rel="noopener">유튜브에서 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7일 플랜 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">7-DAY ACTION PLAN</p>
+        <h2>오늘부터 7일, 첫 영상 업로드까지</h2>
+      </div>
+      <div class="days">
+        <div class="day reveal"><span class="d">DAY 1~2</span><b>벤치마킹 · 시장 분석</b><ul><li>벤치마킹 채널 3개 선정</li><li>인기 영상 30편 리스트업</li><li>조회수·좋아요 패턴 분석</li><li>후킹 문구·썸네일 저장</li></ul></div>
+        <div class="day reveal" data-delay="1"><span class="d">DAY 3</span><b>유형 확정 · 기획</b><ul><li>4대 유형 중 1개 확정</li><li>채널 컨셉·이름·톤 설정</li><li>첫 영상 대본·스토리보드</li><li>제휴 마케팅 계정 개설</li></ul></div>
+        <div class="day reveal" data-delay="2"><span class="d">DAY 4~5</span><b>첫 콘텐츠 제작</b><ul><li>촬영 · 소스 확보</li><li>첫 영상 편집 완료</li><li>후킹 3초 · 마무리 행동 유도</li><li>썸네일·제목 두 가지 안</li></ul></div>
+        <div class="day reveal"><span class="d">DAY 6</span><b>업로드 · 최적화</b><ul><li>쇼츠 업로드</li><li>해시태그·설명 최적화</li><li>상품 링크·제휴 URL 연결</li><li>댓글 소통</li></ul></div>
+        <div class="day last reveal"><span class="d">DAY 7</span><b>주간 리뷰 → 다음 주 3편 로드맵</b><ul><li>조회수·클릭률·시청 지속률 분석</li><li>성공·실패 요인 찾기</li><li>다음 주 3편 확정</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 특전 · 수강료 -->
+  <section class="section price-sec" id="price">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">수강생 전용 특전</p>
+        <h2>배우는 데서 끝나지 않고,<br>결과가 나올 때까지 함께합니다</h2>
+        <p>총 4회 수업 후에도 3개월 피드백과 1년 소통방으로 혼자 두지 않습니다.</p>
+      </div>
+      <div class="perks">
+        <div class="perk reveal"><small>특전 01 · 평생 소장</small><b>강의 녹화본 평생 제공</b><p>전 회차 고화질 녹화 영상과 올인원 교안으로 언제든 복습합니다.</p><span class="val"><em>99</em>만원의 가치</span></div>
+        <div class="perk reveal" data-delay="1"><small>특전 02 · 밀착 케어</small><b>3개월 밀착 피드백</b><p>매주 올리는 영상을 점검하고 채널 브랜딩·썸네일 개선을 도와드립니다.</p><span class="val"><em>99</em>만원의 가치</span></div>
+        <div class="perk reveal" data-delay="2"><small>특전 03 · 개별 맞춤</small><b>1:1 Zoom 컨설팅 1시간</b><p>내 채널의 방향과 문제점을 강사와 직접 진단하고 6개월 마일스톤을 받습니다.</p><span class="val"><em>33</em>만원의 가치</span></div>
+        <div class="perk reveal"><small>특전 04 · 치트키</small><b>분야별 쇼핑쇼츠 키워드 모음집</b><p>카테고리별 검색어, 썸네일 카피·제목 템플릿, 태그 구조 가이드.</p><span class="val"><em>33</em>만원의 가치</span></div>
+        <div class="perk reveal" data-delay="1"><small>특전 05 · 네트워킹</small><b>1년 수강생 전용 소통방</b><p>유튜브 트렌드·저작권 이슈 공유, 동료 크리에이터와 함께 성장합니다.</p><span class="val"><em>99</em>만원의 가치</span></div>
+        <div class="perk reveal" data-delay="2"><small>보너스</small><b>무료특강 참여자 선물</b><p>특강에 참여하신 분께 실습 자료를 선물로 보내 드립니다.</p><span class="val">자세한 내용은 문의</span></div>
+      </div>
+      <div class="price-box reveal">
+        <div>
+          <p class="total">특전 가치 합계 <del>363만원</del></p>
+          <div class="big">69<small>만원</small></div>
+          <p class="sub">카카오 스토어 카드 결제 · 무이자 5개월 시 <b>월 13.8만원</b></p>
+          <span class="cash">현금 결제 시 59만원 (현금영수증 가능)</span>
+        </div>
+        <div class="btns">
+          <a class="btn btn-kakao js-store" href="#">카카오 스토어에서 신청</a>
+          <a class="btn btn-line" href="sms:01067798833">문자로 일정 문의</a>
+          <p class="card-note">BC·하나·우리·광주·수협카드 무이자 5개월, 그 외 카드 무이자 3개월 · 판매 이즈원주식회사</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마지막 안내 -->
+  <section class="final">
+    <div class="wrap">
+      <h2>한 번 만든 영상이<br>계속 일하게 만드세요</h2>
+      <p>먼저 무료특강으로 쇼핑쇼츠가 나에게 맞는지 확인해 보셔도 좋습니다.</p>
+      <div class="btn-row">
+        <a class="btn js-free" style="background:#fff;color:var(--yt)" href="#">무료특강 신청</a>
+        <a class="btn btn-line" href="https://pf.kakao.com/_qHhpG/chat">카카오톡으로 상담하기</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-foot"></footer>
+<div id="dock"></div>
+<script src="js/site.js"></script>
+<script>
+/* 첫 화면 휴대폰: 쇼츠 → 쿠팡 → 수수료 */
+(function () {
+  var ph = document.getElementById("flow-phone"); if (!ph) return;
+  var coins = document.querySelectorAll(".phone-stage .coin"), n = 1;
+  function go() { ph.className = "phone s" + n; coins.forEach(function (c) { c.classList.toggle("on", c.dataset.step == n); }); n = n % 3 + 1; }
+  go(); setInterval(go, 3200);
+})();
+
+/* 무료특강 버튼 */
+document.querySelectorAll(".js-free").forEach(function (a) { a.href = window.KAIA_LINKS.freeClass; });
+
+/* 1분 자가 진단 */
+(function () {
+  var ans = {}, out = document.getElementById("quiz-result");
+  var R = {
+    t1: ["TYPE 01 · 직접 촬영형", "시간이 있고 얼굴·목소리를 보여도 괜찮다면 가장 오래 가는 길입니다. 찐 후기는 구매 전환이 높고 브랜드 협찬으로 이어집니다."],
+    t4: ["TYPE 04 · 지식 정보 전달형", "잘 아는 분야가 있다면 그 자체가 무기입니다. 꿀팁으로 먼저 신뢰를 얻고 제품을 자연스럽게 연결해 조회수와 제휴 수익을 함께 만듭니다."],
+    t2: ["Stage 1 · 빠른 편집형으로 감각 익히기", "시간이 부족하고 빠른 첫 수익이 목표라면, 사용 허락된 소스로 편집형 쇼츠를 만들며 업로드 감각부터 익히세요. 이후 Stage 2로 넘어가는 루트를 함께 설계해 드립니다."],
+    hand: ["손·제품 위주 촬영형", "얼굴 노출이 부담된다면 손과 제품만 보이게 찍어도 충분합니다. 목소리 대신 AI 더빙과 자막으로 직접 촬영형의 장점을 그대로 가져가세요."]
+  };
+  document.querySelectorAll(".q").forEach(function (q) {
+    q.querySelectorAll("button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        q.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+        ans[q.dataset.k] = b.dataset.v === "1";
+        if (Object.keys(ans).length === 4) show();
+      });
+    });
+  });
+  function show() {
+    var k = ans.expert ? "t4" : (ans.time && ans.face) ? "t1" : (ans.time && !ans.face) ? "hand" : "t2";
+    if (!ans.time && !ans.speed && ans.expert) k = "t4";
+    out.innerHTML = "<small>나에게 맞는 출발점</small><h3>" + R[k][0] + "</h3><p>" + R[k][1] + "</p>";
+    out.classList.add("show");
+  }
+})();
+</script>
+</body>
+</html>

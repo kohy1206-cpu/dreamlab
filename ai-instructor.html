@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI강사되기 · 자격증반 · 한국AI활용지도사교육연구협회</title>
+<meta name="description" content="60대 챗맹도, 경력단절 여성도 하루 3시간, 월 200만원 AI강사로 데뷔합니다. AI활용지도사 2급·1급 자격증반, 면접 컨설팅, 올인원 패키지.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  /* ---------- 첫 화면 ---------- */
+  .ai-hero { padding: 72px 0 84px; overflow: hidden; }
+  .ai-hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .ai-hero h1 { margin: 14px 0 20px; }
+  .ai-hero h1 em { font-style: normal; color: var(--brand); }
+  .ai-hero .lead { font-size: 1.08rem; color: var(--ink-soft); max-width: 31em; margin-bottom: 28px; }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero-stats div { background: var(--card); border-radius: 14px; padding: 14px 18px; box-shadow: 0 6px 16px rgba(15,35,80,.07); }
+  .hero-stats b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--brand); line-height: 1.1; }
+  .hero-stats span { font-size: .78rem; color: var(--ink-soft); }
+  .stage { position: relative; aspect-ratio: 1; max-width: 440px; width: 100%; justify-self: center; }
+  .stage .halo { position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #fff 0 30%, transparent 31%), conic-gradient(from 0deg, #4ff3d6, #2350b0, #ff8fb1, #ffd84d, #4ff3d6); animation: spin 26s linear infinite; opacity: .9; }
+  .stage .podium { position: absolute; left: 16%; right: 16%; bottom: 8%; height: 20%; background: var(--brand-deep); border-radius: 50% / 30%; box-shadow: 0 18px 30px rgba(15,35,80,.3); }
+  .stage .board { position: absolute; left: 14%; right: 14%; top: 14%; bottom: 30%; background: #0f2350; border: 6px solid #fff; border-radius: 18px; color: #fff; display: grid; place-items: center; text-align: center; padding: 18px; box-shadow: 0 20px 40px rgba(15,35,80,.3); }
+  .stage .board small { color: var(--marker); font-weight: 700; letter-spacing: .12em; font-size: .72rem; }
+  .stage .board strong { display: block; font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.8rem); line-height: 1.35; margin-top: 4px; }
+  .stage .board .won { color: var(--marker); }
+  .stage .lamp { position: absolute; right: -2%; bottom: 4%; width: 30%; animation: bob 3.6s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(15,35,80,.25)); }
+  .stage .tag { position: absolute; background: #fff; border: 2px solid var(--brand); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: .78rem; box-shadow: 0 8px 18px rgba(15,35,80,.15); animation: bob 4s ease-in-out infinite; white-space: nowrap; }
+  .tag.t1 { left: -2%; top: 8%; } .tag.t2 { right: 0; top: 2%; animation-delay: .8s; border-color: #ff8fb1; } .tag.t3 { left: 0; bottom: 18%; animation-delay: 1.6s; border-color: #4ff3d6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .stage * { animation: none !important; } }
+  @media (max-width: 860px) { .ai-hero .wrap { grid-template-columns: 1fr; } .stage { max-width: 330px; } }
+
+  /* ---------- 목표 ---------- */
+  .goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .goal { background: var(--brand-deep); color: #e7ecf7; border-radius: 20px; padding: 30px 26px; position: relative; overflow: hidden; }
+  .goal::after { content: ""; position: absolute; right: -30px; bottom: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,216,77,.12); }
+  .goal .chk { width: 46px; height: 46px; border-radius: 12px; background: var(--marker); display: grid; place-items: center; margin-bottom: 16px; }
+  .goal .chk svg { width: 26px; height: 26px; stroke: var(--brand-deep); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .goal b { display: block; color: #fff; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.45; margin-bottom: 8px; }
+  .goal p { font-size: .9rem; color: #c9d3ea; }
+  @media (max-width: 860px) { .goals { grid-template-columns: 1fr; } }
+
+  /* ---------- 3단계 로드맵 ---------- */
+  .road { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; align-items: end; }
+  .road .lv { background: var(--card); border: 2px solid var(--brand); border-bottom: 0; border-radius: 18px 18px 0 0; padding: 26px 22px; display: grid; gap: 8px; }
+  .road .lv:nth-child(1) { min-height: 240px; } .road .lv:nth-child(2) { min-height: 300px; border-color: #ff8fb1; } .road .lv:nth-child(3) { min-height: 360px; border-color: #20bfa3; }
+  .road .lv span { font-family: var(--font-display); font-weight: 800; color: var(--brand); font-size: .95rem; }
+  .road .lv:nth-child(2) span { color: #d4547d; } .road .lv:nth-child(3) span { color: #138a76; }
+  .road .lv b { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.4; }
+  .road .lv p { color: var(--ink-soft); font-size: .9rem; }
+  .road-base { height: 14px; background: var(--brand-deep); border-radius: 0 0 10px 10px; }
+  @media (max-width: 760px) { .road { grid-template-columns: 1fr; gap: 12px; } .road .lv { min-height: 0 !important; border-bottom: 2px solid; border-radius: 18px; border-color: inherit; } .road .lv:nth-child(1) { border-bottom-color: var(--brand); } .road .lv:nth-child(2) { border-bottom-color: #ff8fb1; } .road .lv:nth-child(3) { border-bottom-color: #20bfa3; } .road-base { display: none; } }
+
+  /* ---------- 디지털배움터 ---------- */
+  .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .why { background: var(--card); border-radius: 16px; padding: 22px 18px; box-shadow: 0 6px 16px rgba(15,35,80,.06); }
+  .why i { font-style: normal; font-family: var(--font-display); font-weight: 800; color: #fff; background: var(--brand); border-radius: 50%; width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 12px; }
+  .why b { display: block; font-size: 1rem; margin-bottom: 6px; line-height: 1.45; }
+  .why p { font-size: .84rem; color: var(--ink-soft); line-height: 1.65; }
+  @media (max-width: 1000px) { .why-grid { grid-template-columns: repeat(2, 1fr); } .why:last-child { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .why-grid { grid-template-columns: 1fr; } }
+  .pay-calc { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .calc { background: var(--brand-deep); color: #fff; border-radius: 20px; padding: 26px 28px; display: grid; gap: 4px; }
+  .calc small { color: #b9c5e0; font-size: .82rem; }
+  .calc .eq { font-size: 1rem; color: #dfe6f5; }
+  .calc strong { font-family: var(--font-display); font-size: clamp(1.8rem, 4.4vw, 2.6rem); color: var(--marker); line-height: 1.2; }
+  .calc-note { grid-column: 1 / -1; font-size: .78rem; color: var(--ink-soft); }
+  @media (max-width: 700px) { .pay-calc { grid-template-columns: 1fr; } }
+
+  /* ---------- 콘텐츠 고민 해결 ---------- */
+  .solve { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; }
+  .solve .box { border-radius: 20px; padding: 30px; text-align: center; }
+  .solve .worry { background: var(--card); border: 2px dashed #a9b6d4; color: var(--ink-soft); }
+  .solve .fix { background: var(--brand); color: #fff; box-shadow: 0 16px 34px rgba(35,80,176,.3); }
+  .solve .box b { display: block; font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 8px; }
+  .solve .fix b { color: var(--marker); }
+  .solve .arrow { font-size: 2rem; color: var(--brand); font-weight: 800; }
+  .solve-line { margin-top: 26px; text-align: center; font-family: var(--font-display); font-size: clamp(1.1rem, 2.6vw, 1.4rem); font-weight: 700; }
+  @media (max-width: 760px) { .solve { grid-template-columns: 1fr; } .solve .arrow { transform: rotate(90deg); justify-self: center; } }
+
+  /* ---------- 과정 카드 ---------- */
+  .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .course { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px 26px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+  .course .lvl { display: inline-block; align-self: flex-start; font-size: .78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--blueprint); color: var(--brand); }
+  .course h3 { font-size: 1.35rem; }
+  .course .sum { color: var(--ink-soft); font-size: .92rem; }
+  .course ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .course li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; font-size: .9rem; line-height: 1.55; }
+  .course li::before { content: "✓"; color: var(--brand); font-weight: 800; }
+  .course li em { font-style: normal; font-size: .78rem; color: #d4547d; font-weight: 700; display: block; }
+  .course .price { margin-top: auto; border-top: 1px dashed var(--line); padding-top: 16px; display: grid; gap: 2px; }
+  .price del { color: #8a94a8; font-size: .86rem; }
+  .price strong { font-family: var(--font-display); font-size: 2rem; color: var(--brand-deep); line-height: 1.2; }
+  .price strong small { font-size: 1rem; }
+  .price span { font-size: .8rem; color: var(--ink-soft); }
+  .course .btn { min-height: 52px; }
+  @media (max-width: 960px) { .courses { grid-template-columns: 1fr; } }
+
+  /* ---------- 올인원 ---------- */
+  .allin { background: linear-gradient(135deg, #0f2350, #1b3a7c); color: #e7ecf7; border-radius: 28px; padding: clamp(28px, 5vw, 52px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; position: relative; overflow: hidden; }
+  .allin::before { content: "BEST"; position: absolute; top: 22px; right: -38px; transform: rotate(35deg); background: var(--marker); color: var(--brand-deep); font-weight: 800; font-size: .8rem; letter-spacing: .1em; padding: 6px 48px; }
+  .allin h2 { color: #fff; }
+  .allin h2 span { background: linear-gradient(90deg, #ffd84d, #f5b301); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .allin .eyebrow { color: var(--marker); }
+  .allin-list { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 0; }
+  .allin-list li { display: flex; justify-content: space-between; gap: 12px; padding: 13px 0; border-bottom: 1px dotted rgba(255,255,255,.25); font-size: .95rem; }
+  .allin-list li b { color: var(--marker); white-space: nowrap; font-weight: 700; }
+  .allin-price { background: #fff; color: var(--ink); border-radius: 22px; padding: 30px 26px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+  .allin-price del { color: #8a94a8; }
+  .allin-price strong { display: block; font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 3.2rem); color: var(--brand); line-height: 1.15; margin: 4px 0; }
+  .allin-price strong small { font-size: 1.2rem; }
+  .allin-price p { font-size: .86rem; color: var(--ink-soft); margin-bottom: 18px; }
+  .allin-price .btn { width: 100%; }
+  @media (max-width: 860px) { .allin { grid-template-columns: 1fr; } }
+
+  /* ---------- 수강료 표 ---------- */
+  .fee-wrap { overflow-x: auto; background: var(--card); border-radius: 20px; box-shadow: 0 10px 26px rgba(15,35,80,.08); }
+  .fee { width: 100%; border-collapse: collapse; min-width: 640px; font-size: .92rem; }
+  .fee th, .fee td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+  .fee thead th { background: var(--brand-deep); color: #fff; font-weight: 700; font-size: .85rem; }
+  .fee td del { color: #8a94a8; }
+  .fee td.now { font-weight: 800; color: var(--brand); font-size: 1.05rem; }
+  .fee tr.hl td { background: #fff9dc; }
+  .fee-notes { margin-top: 18px; display: grid; gap: 6px; font-size: .84rem; color: var(--ink-soft); }
+  .fee-notes b { color: var(--ink); }
+
+  /* ---------- 자격 ---------- */
+  .cert-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 560px; margin: 0 auto; }
+  .cert-row figure { margin: 0; text-align: center; }
+  .cert-row img { border-radius: 6px; box-shadow: 0 10px 24px rgba(15,35,80,.18); background: #fff; }
+  .cert-row figure:first-child { transform: rotate(-3deg); } .cert-row figure:last-child { transform: rotate(3deg); }
+  .cert-row figcaption { margin-top: 12px; font-weight: 700; }
+  .cert-note { margin-top: 24px; text-align: center; font-size: .8rem; color: var(--ink-soft); }
+
+  /* ---------- 자주 묻는 질문 ---------- */
+  .faq { display: grid; gap: 12px; max-width: 860px; }
+  .faq details { background: var(--card); border-radius: 16px; padding: 18px 22px; box-shadow: 0 4px 12px rgba(15,35,80,.05); }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 1.02rem; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  .faq summary::after { content: "+"; color: var(--brand); font-size: 1.4rem; line-height: 1; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { margin-top: 12px; color: var(--ink-soft); font-size: .93rem; }
+
+  /* ---------- 마지막 안내 ---------- */
+  .final { background: var(--brand); color: #fff; text-align: center; padding: 80px 0; }
+  .final h2 { color: #fff; }
+  .final p { color: #dfe6f5; margin: 14px auto 28px; max-width: 34em; }
+  .final .btn-row { justify-content: center; }
+  .final .btn-line { background: transparent; color: #fff; border-color: #fff; }
+
+  .verify { margin-top: 18px; display: grid; justify-items: center; gap: 8px; text-align: center; }
+  .verify .btn { min-height: 52px; font-size: .95rem; }
+  .verify small { font-size: .78rem; color: var(--ink-soft); }
+  /* 수입 금액 빨강 강조 */
+  .won-red { color: #e5383b; }
+  .goal .won-red, .calc strong.won-red { color: #ff5c5f; }
+  .stage .board .crew { display: block; font-size: .95rem; font-weight: 700; color: #dfe6f5; margin-top: 6px; }
+  .stage .board .crew-num { font-size: clamp(2rem, 5vw, 2.8rem); color: #fff; margin-top: 0; line-height: 1.15; }
+  .stage .board .crew-num b { color: var(--marker); }
+  .stage .board .crew-line { display: block; width: 60%; height: 1px; margin: 10px auto; background: rgba(255,255,255,.3); }
+  .stage .board .vision { display: block; font-size: .9rem; font-weight: 700; color: #fff; }
+  .stage .board .vision em { font-style: normal; color: #ff5c5f; }
+</style>
+</head>
+<body>
+<header id="site-head"></header>
+
+<main>
+  <!-- 첫 화면 -->
+  <section class="ai-hero blueprint-bg">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">AI강사되기 · AI활용지도사 자격증반</p>
+        <h1>60대 챗맹도, 경단녀도<br><em>하루 3시간</em>, <span class="won-red">월 200만원</span><br>AI강사로 데뷔합니다</h1>
+        <p class="lead">강의 경험이 없어도 괜찮습니다. 자격증, 강의 교안, 면접 준비까지 협회와 고현미(지니쌤)가 처음부터 끝까지 함께합니다.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#courses">과정 살펴보기</a>
+          <a class="btn btn-line" href="#fee">수강료 보기</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>총 4회</b><span>급수별 교육 구성</span></div>
+          <div><b>2급 · 1급</b><span>협회 자격증 발급</span></div>
+          <div><b>무이자 5개월</b><span>카카오 스토어 결제</span></div>
+        </div>
+      </div>
+      <div class="stage reveal" aria-hidden="true">
+        <div class="halo"></div>
+        <div class="podium"></div>
+        <div class="board"><div><small>2026년 현재</small><span class="crew">협회 소속 강사</span><strong class="crew-num"><b data-count="80">80</b>여 명</strong><span class="crew-line"></span><span class="vision">하루 3시간 · <em>월 200만원</em></span></div></div>
+        <span class="tag t1">왕초보 OK</span>
+        <span class="tag t2">경력단절 OK</span>
+        <span class="tag t3">60대 시니어 OK</span>
+        <img class="lamp" src="img/genie-lamp.webp" width="400" height="400" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- 목표 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">우리의 목표는 명확합니다</p>
+        <h2>자격증이 아니라 <span class="mark">‘일(Job)’</span>을 만듭니다</h2>
+      </div>
+      <div class="goals">
+        <div class="goal reveal"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b>2026년 비전<br>하루 3시간 근무, <span class="won-red">월 200만원</span></b><p>디지털배움터 강의로 안정된 첫 수입을 만듭니다.</p></div>
+        <div class="goal reveal" data-delay="1"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b>노동 중심이 아닌<br>AI를 활용한 효율적 수익</b><p>강의 준비부터 홍보까지 AI로 시간을 줄입니다.</p></div>
+        <div class="goal reveal" data-delay="2"><div class="chk"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><b>현장에서 바로 통하는<br>실전 강사</b><p>교안·면접·이력서까지 준비해 바로 현장에 섭니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3단계 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">AI강사 성장 로드맵</p>
+        <h2>세 계단으로 오래 가는 강사가 됩니다</h2>
+        <p>돈을 벌면서 준비하고, 동시에 나를 알리고, 미래 먹거리까지 만듭니다.</p>
+      </div>
+      <div class="road">
+        <div class="lv reveal"><span>1단계 · 초단기</span><b>돈 벌면서 준비하기</b><p>디지털배움터 강사로 시작해 강의 경력과 안정된 수입을 동시에 만듭니다.</p></div>
+        <div class="lv reveal" data-delay="1"><span>2단계 · 중기</span><b>온라인 건물주 되기</b><p>유튜브·블로그·인스타 등 SNS로 나를 브랜딩하고 잠재 고객을 모읍니다.</p></div>
+        <div class="lv reveal" data-delay="2"><span>3단계 · 장기</span><b>미래 먹거리 만들기</b><p>무료특강 → 모집 → 개강의 흐름을 만들어 강사로 오래 살아남습니다.</p></div>
+      </div>
+      <div class="road-base"></div>
+    </div>
+  </section>
+
+  <!-- 디지털배움터 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">1단계 · 디지털배움터</p>
+        <h2>디지털배움터가 <span class="mark">초보 강사에게 최적</span>인 이유</h2>
+        <p>디지털배움터는 국민 누구나 가까운 곳에서 디지털 교육을 받을 수 있도록 정부가 운영하는 사업입니다. 강의 경험이 없는 분께 가장 좋은 첫 무대입니다.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why reveal"><i>1</i><b>수강생이 왕초보</b><p>“구글 아이디가 뭐예요?” 사진 전송부터 배우는 분들이라 기초부터 차근차근 가르치면 됩니다.</p></div>
+        <div class="why reveal" data-delay="1"><i>2</i><b>처음 지원하는 강사 우대</b><p>일자리 창출이 목적인 정부 사업이라 디지털배움터가 처음인 분이 우선순위입니다.</p></div>
+        <div class="why reveal" data-delay="2"><i>3</i><b>쉽고 재밌게가 정답</b><p>초보가 왕초보를 가르치는 느낌으로, 눈높이를 맞추는 강사가 오히려 잘 가르칩니다.</p></div>
+        <div class="why reveal"><i>4</i><b>공인된 경력</b><p>강의 후 경력증명서가 발급되어 다음 강의 지원에 쓸 수 있는 공식 스펙이 됩니다.</p></div>
+        <div class="why reveal" data-delay="1"><i>5</i><b>안정된 수익</b><p>정해진 시간과 강사료로 매달 예측 가능한 수입을 만들 수 있습니다.</p></div>
+      </div>
+      <div class="pay-calc">
+        <div class="calc reveal"><small>하루 3시간 근무 시</small><span class="eq">3시간 × 21일 × 33,000원</span><strong class="won-red">월 약 207만원</strong></div>
+        <div class="calc reveal" data-delay="1"><small>하루 6시간 근무 시</small><span class="eq">6시간 × 21일 × 33,000원</span><strong class="won-red">월 약 415만원</strong></div>
+        <p class="calc-note">※ 2025년 디지털배움터 파견강사 시급 33,000원 기준 예시입니다. 연도별 공고와 운영 기관에 따라 강사료와 근무 형태는 달라질 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 콘텐츠 고민 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">콘텐츠 고민 없이 바로 시작</p>
+        <h2>초보 강사의 가장 큰 벽, ‘강의 교안’</h2>
+      </div>
+      <div class="solve">
+        <div class="box worry reveal"><b>걱정</b>강의할 나만의 콘텐츠가 없다?</div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="box fix reveal" data-delay="1"><b>해결</b>이미 검증된 커리큘럼을 제공합니다</div>
+      </div>
+      <p class="solve-line reveal">디지털배움터 표준 커리큘럼과 자격증 과정으로 ‘팔리는 콘텐츠’를 바로 드립니다.<br>여러분의 역할은 <span class="mark">‘제작’이 아니라 ‘전달’</span>입니다.</p>
+    </div>
+  </section>
+
+  <!-- 과정 -->
+  <section class="section" id="courses">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">과정 안내</p>
+        <h2>내게 맞는 과정을 고르세요</h2>
+        <p>모든 과정에 강의 교안과 PDF 자료집, 전용 커뮤니티 참여, 수업 녹화본 영상이 기본으로 제공됩니다.</p>
+      </div>
+      <div class="courses">
+        <article class="course reveal">
+          <span class="lvl">입문 · 총 4회</span>
+          <h3>AI활용지도사 2급</h3>
+          <p class="sum">핵심 이론부터 실무 기초까지 탄탄하게 다집니다.</p>
+          <ul>
+            <li><span>실전 자료팩 제공<em>100만원 상당</em>디지털배움터 '23~'24 강의 교안(초·중·심화)과 각종 전자책</span></li>
+            <li><span>2급 자격증 무료 발급<em>10만원 상당</em>한국AI활용지도사교육연구협회 발급(PDF)</span></li>
+            <li><span>강의 교안 · PDF 자료집 · 커뮤니티 · 수업 녹화본</span></li>
+          </ul>
+          <div class="price"><del>정가 55만원</del><strong>39<small>만원</small></strong><span>무이자 5개월 시 월 7.8만원</span></div>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024811" href="https://store.kakao.com/dreamlab/products/689024811">카카오 스토어에서 신청</a>
+        </article>
+        <article class="course reveal" data-delay="1">
+          <span class="lvl">심화 · 총 4회</span>
+          <h3>AI활용지도사 1급</h3>
+          <p class="sum">심화 이론과 실무를 마스터하고 면접까지 대비합니다.</p>
+          <ul>
+            <li><span>실전 자료팩 제공<em>100만원 상당</em>디지털배움터 '23~'24 강의 교안(초·중·심화)과 각종 전자책</span></li>
+            <li><span>1급 자격증 무료 발급<em>15만원 상당</em>한국AI활용지도사교육연구협회 발급(PDF)</span></li>
+            <li><span>시크릿 팁 &amp; Q&amp;A 1년 회원권<em>39.6만원 상당</em>실시간 질의응답, 실무 노하우와 면접 정보 공유</span></li>
+          </ul>
+          <div class="price"><del>정가 66만원</del><strong>44<small>만원</small></strong><span>무이자 5개월 시 월 8.8만원</span></div>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024641" href="https://store.kakao.com/dreamlab/products/689024641">카카오 스토어에서 신청</a>
+        </article>
+        <article class="course reveal" data-delay="2">
+          <span class="lvl">합격 대비 · Master Class</span>
+          <h3>이력서 · 면접 컨설팅</h3>
+          <p class="sum">강사 데뷔를 위한 마지막 관문, 알짜배기로 준비합니다.</p>
+          <ul>
+            <li><span>최신 기출 분석<em>100만원 상당</em>25년도 지역별 면접시험 문제 제공</span></li>
+            <li><span>실전 대비<br>면접 예상문제와 모범답안 제공</span></li>
+            <li><span>1:1 맞춤 코칭 60분<em>39.6만원 상당</em>이력서·면접 요령 강의 VOD(60분) 또는 Zoom 실시간</span></li>
+          </ul>
+          <div class="price"><del>정가 33만원</del><strong>20<small>만원</small></strong><span>무이자 5개월 시 월 4만원</span></div>
+          <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/685871822" href="https://store.kakao.com/dreamlab/products/685871822">카카오 스토어에서 신청</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 올인원 -->
+  <section class="section blueprint-bg" id="allinone">
+    <div class="wrap">
+      <div class="allin reveal">
+        <div>
+          <p class="eyebrow">가장 많이 선택하는 과정</p>
+          <h2><span>올인원</span> AI강사되기 패키지</h2>
+          <p style="margin-top:10px;color:#c9d3ea">2급 · 1급 · 면접 컨설팅을 한 번에. 강의기술, 교안, 면접, 이력서, 자격증까지 모든 도움을 다 드립니다.</p>
+          <ul class="allin-list">
+            <li>AI활용지도사 2급 과정 + 자격증<b>10만원 상당 무료 발급</b></li>
+            <li>AI활용지도사 1급 과정 + 자격증<b>15만원 상당 무료 발급</b></li>
+            <li>디지털배움터 교안 및 전자책 패키지<b>100만원 가치</b></li>
+            <li>시크릿 팁 1년 멤버십<b>39만 6천원 가치</b></li>
+            <li>1:1 취업 · 면접 컨설팅<b>Premium</b></li>
+          </ul>
+        </div>
+        <div class="allin-price">
+          <del>정가 140만원</del>
+          <strong>89<small>만원</small></strong>
+          <p>무이자 5개월 시 월 17.8만원</p>
+          <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab/products/685871753" href="https://store.kakao.com/dreamlab/products/685871753">카카오 스토어에서 신청</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 수강료 -->
+  <section class="section" id="fee">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">수강료 한눈에 보기</p>
+        <h2>부담 없이 나눠서 시작하세요</h2>
+      </div>
+      <div class="fee-wrap reveal">
+        <table class="fee">
+          <thead><tr><th>과정</th><th>정가</th><th>할인가</th><th>무이자 5개월</th><th>현금 결제</th></tr></thead>
+          <tbody>
+            <tr><td>AI활용지도사 2급 자격증반</td><td><del>55만원</del></td><td class="now">39만원</td><td>월 7.8만원</td><td>37만원</td></tr>
+            <tr><td>AI활용지도사 1급 자격증반</td><td><del>66만원</del></td><td class="now">44만원</td><td>월 8.8만원</td><td>42만원</td></tr>
+            <tr><td>1:1 이력서 · 면접 컨설팅</td><td><del>33만원</del></td><td class="now">20만원</td><td>월 4만원</td><td>19만원</td></tr>
+            <tr class="hl"><td><b>올인원 AI강사되기</b> (2급+1급+면접)</td><td><del>140만원</del></td><td class="now">89만원</td><td>월 17.8만원</td><td>85만원</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="fee-notes">
+        <p><b>결제</b> · 카카오 스토어에서 카드 결제(무이자 3·5개월)로 진행됩니다. 판매는 이즈원주식회사가 담당합니다.</p>
+        <p><b>현금 결제</b> · 계좌 이체 시 현금가가 적용되며 현금영수증·세금계산서를 발행해 드립니다. 계좌 안내는 문자(010-6779-8833)로 문의해 주세요.</p>
+        <p><b>더 크게 성장하고 싶다면</b> · 강사 브랜딩과 온라인 수익 구조까지 만드는 <a href="consulting.html">온라인 건물주 1:1 맞춤 컨설팅</a>도 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 자격 -->
+  <section class="section blueprint-bg">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+        <p class="eyebrow">협회가 직접 발급하는 자격</p>
+        <h2>과정을 마치면 자격증을 드립니다</h2>
+      </div>
+      <div class="cert-row reveal">
+        <figure><img src="img/cert-2.jpg" width="600" height="849" alt="AI활용지도사 2급 자격증 예시"><figcaption>AI활용지도사 2급</figcaption></figure>
+        <figure><img src="img/cert-1.jpg" width="600" height="849" alt="AI활용지도사 1급 자격증 예시"><figcaption>AI활용지도사 1급</figcaption></figure>
+      </div>
+      <p class="cert-note">자격관리기관 한국AI활용지도사교육연구협회 · 민간자격 등록번호 2024-005198 · 주무부처 과학기술정보통신부 · 본 자격은 국가공인 자격이 아닌 민간자격입니다.</p>
+      <p class="verify"><a class="btn btn-line" href="https://pqi.or.kr/inf/qul/infQulBasDetail.do?searchQulId=117865" target="_blank" rel="noopener">민간자격정보서비스에서 직접 확인하기 ↗</a><small>한국직업능력연구원이 운영하는 공식 사이트에서 등록 여부를 확인할 수 있습니다.</small></p>
+    </div>
+  </section>
+
+  <!-- 지니쌤 한마디 -->
+  <section class="genie-say">
+    <div class="wrap">
+      <img class="reveal" src="img/genie-character.jpg" width="900" height="900" alt="손을 가슴에 얹고 안내하는 지니쌤 캐릭터">
+      <p class="say reveal" data-delay="1">저도 결혼과 육아로 5년을 쉬었던<br>경력단절 프로그래머였어요.<br>지금은 주 3일 강의하는 AI강사입니다.<br>여러분도 할 수 있어요.<small>고현미(지니쌤)의 한마디</small></p>
+    </div>
+  </section>
+
+  <!-- 자주 묻는 질문 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">자주 묻는 질문</p>
+        <h2>궁금한 점을 먼저 풀어 드릴게요</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal"><summary>강의 경험이 전혀 없어도 되나요?</summary><p>네. 디지털배움터는 처음 지원하는 강사를 우대하고, 수강생도 왕초보 어르신이 많습니다. 검증된 교안을 드리기 때문에 ‘전달’에만 집중하시면 됩니다.</p></details>
+        <details class="reveal"><summary>컴퓨터를 잘 못 다루는데 따라갈 수 있을까요?</summary><p>60대 챗맹도 시작할 수 있도록 기초부터 진행합니다. 수업 녹화본 영상이 제공되어 놓친 부분은 다시 보며 복습할 수 있습니다.</p></details>
+        <details class="reveal"><summary>2급과 1급은 어떻게 다른가요?</summary><p>2급은 핵심 이론과 실무 기초, 1급은 심화 이론과 실무 마스터, 면접 대비까지 다룹니다. 1급에는 시크릿 팁 &amp; Q&amp;A 1년 회원권이 함께 제공됩니다.</p></details>
+        <details class="reveal"><summary>결제는 어떻게 하나요?</summary><p>카카오 스토어에서 카드로 결제하며 무이자 할부(3·5개월)가 가능합니다. 현금 결제를 원하시면 문자로 문의해 주세요.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마지막 안내 -->
+  <section class="final">
+    <div class="wrap">
+      <h2>첫 번째 계단이 준비되었습니다</h2>
+      <p>2026년, 하루 3시간 일하는 삶. 그 시작은 오늘 ‘준비된 콘텐츠’를 손에 쥐는 것입니다.</p>
+      <div class="btn-row">
+        <a class="btn btn-kakao js-store" data-store="https://store.kakao.com/dreamlab" href="https://store.kakao.com/dreamlab">카카오 스토어에서 신청</a>
+        <a class="btn btn-line" href="sms:01067798833">문자로 상담하기</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-foot"></footer>
+<div id="dock"></div>
+<script src="js/site.js"></script>
+</body>
+</html>

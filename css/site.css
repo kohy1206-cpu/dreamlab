@@ -1,0 +1,150 @@
+/* 한국AI활용지도사교육연구협회 · 공통 디자인
+   레이아웃 아이디어: "온라인 수익 건물 설계도" — 청사진 격자 + 형광펜 강조, 큰 글씨 */
+:root {
+  --ink: #16233a;          /* 본문 글자: 짙은 남색 */
+  --ink-soft: #46546b;     /* 보조 글자 */
+  --paper: #f8f7f4;        /* 배경 */
+  --card: #ffffff;
+  --brand: #2350b0;        /* 협회 대표색: 지니쌤 원피스의 코발트 블루 */
+  --brand-deep: #0f2350;   /* 딥 네이비 */
+  --blueprint: #e9eef8;    /* 설계도 격자 바탕 */
+  --line: #d6dde0;
+  --marker: #ffd84d;       /* 형광펜 강조 */
+  --kakao: #fee500;        /* 카카오 결제 버튼 */
+  --kakao-ink: #191600;
+
+  --font-display: "Hahmlet", "Noto Serif KR", serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  --fs-base: 19px;
+  --radius: 14px;
+  --wrap: 1120px;
+  color-scheme: light;
+}
+html.big-text { --fs-base: 22px; }
+
+* { box-sizing: border-box; }
+html { font-size: var(--fs-base); scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); line-height: 1.75; word-break: keep-all;
+  padding-bottom: 84px; /* 모바일 하단 고정 바 공간 */
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--brand); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.35; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 700; }
+h3 { font-size: 1.25rem; font-weight: 700; }
+p { margin: 0; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+.mark { background: linear-gradient(transparent 55%, var(--marker) 55%); padding: 0 2px; }
+.eyebrow { font-size: .85rem; font-weight: 700; color: var(--brand); letter-spacing: .04em; }
+:focus-visible { outline: 3px solid var(--marker); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- 상단 머리글 ---------- */
+.site-head { position: sticky; top: 0; z-index: 50; background: rgba(248,247,244,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
+.head-row { display: flex; align-items: center; gap: 16px; min-height: 72px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); margin-right: auto; }
+.logo-mark { width: 48px; height: 48px; border-radius: 50%; flex: none; box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--line); }
+.foot-logo { width: 96px; height: 96px; border-radius: 16px; margin-bottom: 14px; }
+.logo-text { line-height: 1.2; }
+.logo-text b { display: block; font-size: .95rem; }
+.logo-text small { font-size: .72rem; color: var(--ink-soft); letter-spacing: .08em; }
+.nav { display: flex; gap: 4px; }
+.nav a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: .86rem; padding: 10px 10px; border-radius: 8px; white-space: nowrap; }
+.nav a:hover, .nav a[aria-current="page"] { background: var(--blueprint); color: var(--brand-deep); }
+.text-toggle { border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); font: inherit; font-size: .8rem; font-weight: 700; padding: 8px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.menu-btn { display: none; border: 0; background: var(--brand); color: #fff; font: inherit; font-weight: 700; font-size: .9rem; padding: 10px 16px; border-radius: 10px; cursor: pointer; }
+@media (max-width: 1060px) {
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); flex-direction: column; padding: 8px 20px 20px; border-bottom: 1px solid var(--line); }
+  .nav.open { display: flex; }
+  .nav a { font-size: 1.05rem; padding: 14px 12px; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .menu-btn { display: block; }
+  .logo-text b { font-size: .85rem; }
+}
+
+/* ---------- 버튼 ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; padding: 0 28px; border-radius: 12px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s; }
+.btn:hover { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .btn:hover { transform: none; } }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-line { background: var(--card); color: var(--ink); border-color: var(--ink); }
+.btn-kakao { background: var(--kakao); color: var(--kakao-ink); }
+.btn-kakao::before { content: ""; width: 22px; height: 20px; background: var(--kakao-ink); border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%; clip-path: polygon(0 0,100% 0,100% 80%,45% 80%,20% 100%,28% 80%,0 80%); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- 섹션 공통 ---------- */
+.section { padding: 88px 0; }
+.section-head { display: grid; gap: 12px; margin-bottom: 40px; max-width: 760px; }
+.section-head p { color: var(--ink-soft); font-size: 1.05rem; }
+.blueprint-bg {
+  background-color: var(--blueprint);
+  background-image: linear-gradient(rgba(35,80,176,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(35,80,176,.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.ph { display: grid; place-items: center; text-align: center; border: 2px dashed #a9b6d4; border-radius: var(--radius); color: var(--ink-soft); font-size: .8rem; background: repeating-linear-gradient(45deg, #eef1f8, #eef1f8 10px, #f6f8fc 10px, #f6f8fc 20px); padding: 16px; }
+.todo { display: inline-block; font-size: .72rem; font-weight: 700; color: #8a5a00; background: #fff3c4; border: 1px dashed #d9a400; border-radius: 6px; padding: 1px 8px; vertical-align: middle; }
+
+/* ---------- 바닥글 ---------- */
+.site-foot { background: var(--brand-deep); color: #dfe9ea; padding: 56px 0 40px; font-size: .85rem; }
+.site-foot a { color: #fff; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.foot-grid h4 { margin: 0 0 12px; color: #fff; font-size: .95rem; }
+.foot-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.foot-legal { border-top: 1px solid rgba(255,255,255,.15); margin-top: 36px; padding-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px; line-height: 1.7; font-size: .68rem; color: #b9c5e0; }
+.legal-block h5 { margin: 0 0 6px; font-size: .78rem; color: #fff; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.legal-block h5 em { font-style: normal; font-size: .64rem; font-weight: 700; color: var(--brand-deep); background: var(--marker); border-radius: 999px; padding: 1px 10px; }
+.legal-block ul { list-style: none; margin: 0; padding: 0; }
+.legal-note { grid-column: 1 / -1; margin: 0; color: #8f9cbb; }
+.foot-legal .todo { font-size: .9em; }
+@media (max-width: 760px) { .foot-legal { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+
+/* ---------- 모바일 하단 고정 바 ---------- */
+.dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(22,35,58,.08); }
+.dock .wrap { display: flex; gap: 10px; padding-top: 10px; padding-bottom: 10px; }
+.dock .btn { flex: 1; min-height: 56px; padding: 0 12px; }
+@media (min-width: 1061px) { .dock .wrap { justify-content: flex-end; } .dock .btn { flex: none; min-width: 240px; } }
+
+/* ---------- 준비 중 페이지 ---------- */
+.stub { padding: 120px 0; text-align: center; }
+.stub p { color: var(--ink-soft); margin-top: 16px; }
+.stub .btn-row { justify-content: center; margin-top: 32px; }
+
+/* ---------- 스크롤 모션 (페이지 공통) ----------
+   기본은 보이는 상태. JS가 화면 아래쪽 요소에만 .pre를 붙였다가 보이면 떼어 냅니다. */
+.reveal { transition: opacity .7s ease, transform .7s ease; }
+.reveal.pre { opacity: 0; transform: translateY(28px); }
+.reveal[data-delay="1"] { transition-delay: .12s; }
+.reveal[data-delay="2"] { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) { .reveal, .reveal.pre { opacity: 1; transform: none; transition: none; } }
+
+/* ---------- 지니쌤 캐릭터 한마디 (페이지 중간 삽입용) ---------- */
+.genie-say { padding: 64px 0; }
+.genie-say .wrap { display: grid; grid-template-columns: 260px 1fr; gap: 36px; align-items: center; max-width: 960px; }
+.genie-say img { border-radius: 50%; aspect-ratio: 1; object-fit: cover; object-position: 20% 30%; border: 6px solid var(--card); box-shadow: 0 0 0 2px var(--brand), 0 14px 30px rgba(15,35,80,.18); }
+.genie-say .say { position: relative; background: var(--card); border: 2px solid var(--ink); border-radius: 24px; padding: 28px 32px; font-family: var(--font-display); font-size: clamp(1.15rem, 2.6vw, 1.45rem); font-weight: 700; line-height: 1.6; }
+.genie-say .say::before { content: ""; position: absolute; left: -13px; top: 50%; margin-top: -12px; width: 22px; height: 22px; background: var(--card); border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg); }
+.genie-say .say small { display: block; margin-top: 12px; font-family: var(--font-body); font-size: .8rem; font-weight: 500; color: var(--brand); }
+@media (max-width: 700px) { .genie-say .wrap { grid-template-columns: 1fr; justify-items: center; } .genie-say img { width: 200px; } .genie-say .say::before { left: 50%; top: -13px; margin: 0 0 0 -11px; transform: rotate(135deg); } }
+
+.dock .lbl-sm { display: none; }
+@media (max-width: 480px) { .dock .lbl-lg { display: none; } .dock .lbl-sm { display: inline; } .dock .btn { font-size: .92rem; } }
+
+/* ---------- PC 문자 버튼 팝업 ---------- */
+.sms-pop { position: fixed; inset: 0; z-index: 200; background: rgba(10,20,45,.55); display: none; place-items: center; padding: 20px; }
+.sms-pop.open { display: grid; }
+.sms-box { position: relative; background: #fff; border-radius: 22px; padding: 32px 28px 26px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,.25); animation: smsIn .25s ease; }
+@keyframes smsIn { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+.sms-x { position: absolute; top: 10px; right: 12px; border: 0; background: none; font-size: 1.8rem; line-height: 1; color: var(--ink-soft); cursor: pointer; padding: 6px 10px; }
+.sms-ic { font-size: 2.2rem; margin-bottom: 6px; }
+.sms-box h3 { margin-bottom: 6px; }
+.sms-sub { color: var(--ink-soft); font-size: .88rem; }
+.sms-num { margin-top: 18px; display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--blueprint); border-radius: 14px; padding: 14px; }
+.sms-num b { font-family: var(--font-display); font-size: 1.7rem; color: var(--brand-deep); letter-spacing: .02em; }
+.sms-num .btn { min-height: 48px; padding: 0 20px; font-size: .95rem; }
+.sms-msg { min-height: 1.4em; margin-top: 12px; font-size: .86rem; font-weight: 700; color: #138a76; }
+.sms-or { margin-top: 8px; font-size: .84rem; color: var(--ink-soft); }
+.sms-or a { font-weight: 700; }
