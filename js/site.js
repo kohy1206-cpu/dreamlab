@@ -228,6 +228,20 @@
     }, true);
   })();
 
+  /* PC에서 파일을 직접 열었을 때·미리보기에서는 폴더 주소(tc/)가 열리지 않으므로 끝에 index.html을 붙여 줌 (실제 사이트에서는 짧은 주소 그대로) */
+  (function () {
+    if (!(location.protocol === "file:" || /claudeusercontent|claude\.ai/.test(location.hostname))) return;
+    function fix() {
+      document.querySelectorAll("a[href]").forEach(function (a) {
+        var h = a.getAttribute("href"); if (!h || /^(#|mailto:|tel:|sms:|javascript:)/.test(h)) return;
+        try { var u = new URL(a.href); } catch (e) { return; }
+        if (a.href.indexOf(ROOT) !== 0 || !/\/$/.test(u.pathname)) return;
+        u.pathname += "index.html"; a.href = u.href;
+      });
+    }
+    fix(); document.addEventListener("DOMContentLoaded", fix); window.addEventListener("load", fix);
+  })();
+
   /* 유튜브 영상: 썸네일을 누르면 페이지 안에서 바로 재생 ('유튜브에서 보기'는 새 창으로) */
   (function () {
     function ytId(u) { var m = String(u || "").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/))([\w-]{11})/); return m ? m[1] : ""; }

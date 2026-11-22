@@ -131,6 +131,15 @@
   .prog ul { margin: 0; padding-left: 1.1em; color: var(--ink-soft); font-size: .92rem; display: grid; gap: 4px; }
   .prog .who { font-size: .85rem; background: var(--blueprint); border-radius: 8px; padding: 10px 14px; }
   .prog .btn { margin-top: auto; }
+  /* 세 카드의 줄(제목·설명·목록·대상·버튼) 높이를 서로 맞춤 → 하늘색 '대상' 칸이 같은 높이에 */
+  @supports (grid-template-rows: subgrid) {
+    @media (min-width: 961px) {
+      .programs { grid-auto-rows: auto; }
+      .prog { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 14px; align-content: start; }
+      .prog .who { align-self: start; }
+      .prog .btn { margin-top: 0; align-self: end; }
+    }
+  }
   @media (max-width: 960px) { .programs { grid-template-columns: 1fr; } }
 
   /* ---------- 자격 ---------- */
@@ -369,7 +378,7 @@
           <span class="prog-floor">01</span>
           <h3>AI강사되기 · 자격증반</h3>
           <p>AI활용지도사 2급·1급 자격을 취득하고, 디지털배움터에서 하루 3시간·월 200만원 강사로 데뷔합니다.</p>
-          <ul><li>디지털배움터 강의 교안·전자책 제공</li><li>2급·1급 자격증 발급</li><li>이력서·면접 컨설팅</li></ul>
+          <ul><li>바로 쓸 수 있는 강의 교안 제공</li><li>2급·1급 자격증 발급</li><li>이력서·면접 컨설팅</li></ul>
           <p class="who">60대 챗맹, 경력단절 여성, 강의가 처음인 분</p>
           <a class="btn btn-primary" href="ai/">자세히 보기</a>
         </article>
@@ -418,7 +427,7 @@
       <div class="reveal" data-delay="1">
         <p class="eyebrow">수강생 이야기</p>
         <p class="quote">“저 아직 7학년 아닙니다!<br>6학년 6반, 66세입니다.”</p>
-        <p class="story-meta">스스로를 ‘컴맹’이라 부르던 최정화 선생님은 AI를 만난 지 6개월 만에 책을 내고, 지금은 중장년에게 AI를 가르치는 강사로 활동하고 계십니다.</p>
+        <p class="story-meta">최정화 선생님은 AI를 처음 만난 지 6개월 만에 책을 내고, 지금은 중장년에게 AI를 가르치는 강사로 활동하고 계십니다.</p>
         <div class="timeline on-view" aria-label="최정화 선생님의 6개월">
           <div><b>시작</b>컴맹, 막연한 두려움</div>
           <div><b>배움</b>AI 도구를 하나씩</div>
@@ -510,7 +519,7 @@
           <li class="reveal"><time>2026. 01</time>“66세 컴맹, 6개월 만에 AI 작가·강사” 수강생 인터뷰 공개 · AI강사 데뷔 무료특강 개최</li>
           <li class="reveal"><time>2026</time>1:1 컨설팅 런칭</li>
           <li class="reveal"><time>2026. 09</time>유튜브 쇼핑쇼츠 실전 무료특강 개최</li>
-          <li class="reveal"><time>2026. 06 현재</time>AI활용지도사 자격 발급 20명 (진행 중)</li>
+          <li class="reveal"><time>2026. 06 현재</time>AI활용지도사 자격 발급 20명</li>
         </ol>
       </div>
     </div>
@@ -580,7 +589,7 @@
 
 <footer id="site-foot"></footer>
 <div id="dock"></div>
-<script src="js/site.js?v=20261121f"></script>
+<script src="js/site.js?v=20261122a"></script>
 <script>
 /* 협회 소개 영상: 끝나면 다음 영상, 4개 반복 */
 (function () {

@@ -71,6 +71,18 @@
   .master .link::after { content: " →"; }
   @media (max-width: 1100px) { .masters { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 600px) { .masters { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
+  .regs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .reg { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 16px; display: grid; gap: 8px; justify-items: start; box-shadow: 0 4px 12px rgba(15,35,80,.05); }
+  .reg b { font-size: 1.15rem; letter-spacing: .02em; }
+  .reg .lic { font-size: .8rem; font-weight: 700; padding: 5px 10px; border-radius: 999px; line-height: 1.3; }
+  .reg .lic { background: #e6edfb; color: #1d3f8f; }
+  .reg em { position: absolute; right: 12px; top: 12px; font-style: normal; font-size: .72rem; font-weight: 800; color: #8a5a00; background: #fff1c9; padding: 3px 8px; border-radius: 999px; }
+  .reg .lic i { font-style: normal; white-space: nowrap; }
+  .reg-num { color: var(--brand); }
+  .reg-note { margin-top: 14px; font-size: .8rem; color: var(--ink-soft); }
+  @media (max-width: 1100px) { .regs { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 800px) { .regs { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .regs { grid-template-columns: 1fr 1fr; gap: 10px; } .reg { padding: 14px 12px; } }
 
   .btn-yel { background: var(--marker); color: var(--brand-deep); }
   .join { background: var(--brand); color: #fff; text-align: center; padding: 72px 0; }
@@ -165,6 +177,21 @@
     </div>
   </section>
 
+  <!-- 협회 등록 강사 명단: 새 강사가 생기면 아래 목록에 한 줄씩 추가 (마스터 → 1급·2급 → 2급 순서) -->
+  <section class="section" id="registered">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">REGISTERED INSTRUCTORS</p>
+        <h2>협회 등록 강사 <span class="reg-num">52</span>명</h2>
+        <p>한국AI활용지도사교육연구협회의 AI활용지도사 자격을 취득하고 강사로 등록한 분들입니다.</p>
+      </div>
+      <ul class="regs reveal">
+        <li class="reg"><b>노*숙</b><span class="lic">AI활용지도사 <i>1급·2급</i></span><em>마스터</em></li><li class="reg"><b>김*정</b><span class="lic">AI활용지도사 <i>1급·2급</i></span><em>마스터</em></li><li class="reg"><b>최*화</b><span class="lic">AI활용지도사 <i>1급·2급</i></span><em>마스터</em></li><li class="reg"><b>신*경</b><span class="lic">AI활용지도사 <i>1급·2급</i></span><em>마스터</em></li><li class="reg"><b>유*영</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>김*정</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>고*현</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>조*숙</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>장*혜</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>안*희</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>박*석</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>정*화</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>허*봉</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>조*옥</b><span class="lic">AI활용지도사 <i>1급·2급</i></span></li><li class="reg"><b>두*희</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*지</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>남*경</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>채*혜</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>유*희</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*은</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>유*상</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>송*미</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*주</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>박*아</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*수</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>황*옥</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*혜</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*숙</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*윤</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>노*나</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*빈</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>정*혜</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>유*정</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*식</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>고*영</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>최*임</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>허*화</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*미</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>성*희</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>정*숙</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>노*숙</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>최*명</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>박*옥</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>민*</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>방*문</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>배*련</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*영</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>손*숙</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>조*희</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>이*나</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>하*련</b><span class="lic">AI활용지도사 <i>2급</i></span></li><li class="reg"><b>김*선</b><span class="lic">AI활용지도사 <i>2급</i></span></li>
+      </ul>
+      <p class="reg-note">개인정보 보호를 위해 이름 일부를 가렸습니다.</p>
+    </div>
+  </section>
+
   <section class="join">
     <div class="wrap">
       <h2>다음 마스터 강사는 당신입니다</h2>
@@ -179,6 +206,6 @@
 
 <footer id="site-foot"></footer>
 <div id="dock"></div>
-<script src="../js/site.js?v=20261121f"></script>
+<script src="../js/site.js?v=20261122a"></script>
 </body>
 </html>
