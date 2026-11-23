@@ -8,12 +8,12 @@
 <meta property="og:image" content="https://dreamlabai.org/img/og-image.jpg">
 <link rel="icon" href="/favicon.ico">
 <script>
-/* 없는 주소로 들어온 경우: dreamlabai.org/yl2 처럼 주소 끝 글자를 유입경로로 기록하고 메인 페이지(무료특강 칸)로 이동
-   → 새 영상·채널마다 폴더를 만들 필요 없이 dreamlabai.org/아무코드 를 바로 쓸 수 있어요 (영문·숫자·_·- 20자 이내) */
+/* 없는 주소로 들어온 경우: dreamlabai.org/yl2 처럼 주소 끝 글자를 유입경로로 기록하고 메인 페이지 맨 위로 이동
+   → 새 영상·채널마다 폴더를 만들 필요 없이 dreamlabai.org/아무코드 를 바로 쓸 수 있어요 (영문·숫자·_·- 20자 이내) · 메인 페이지 맨 위에서 시작 */
 (function () {
   var seg = location.pathname.split("/").filter(Boolean)[0] || "";
   try { seg = decodeURIComponent(seg); } catch (e) {}
-  if (/^[A-Za-z0-9_-]{1,20}$/.test(seg) && !/\.(html?|php|asp)$/i.test(seg)) location.replace("/?from=" + seg.toLowerCase() + "#free");
+  if (/^[A-Za-z0-9_-]{1,20}$/.test(seg) && !/\.(html?|php|asp)$/i.test(seg)) location.replace("/?from=" + seg.toLowerCase());
   else location.replace("/");
 })();
 </script>
