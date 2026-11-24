@@ -23,6 +23,21 @@
   };
   window.KAIA_LINKS = LINKS;
 
+  /* 다음 무료특강 날짜: 매월 첫째 주 일요일 저녁 8시 30분(한국 시간). 그 시간이 지나면 다음 달로 자동 변경 (안내 메일과 같은 규칙) */
+  function nextFreeClass(now) {
+    now = now || new Date();
+    var k = new Date(now.getTime() + 9 * 3600e3), y = k.getUTCFullYear(), m = k.getUTCMonth();
+    for (var i = 0; i < 3; i++) {
+      var d = 1 + (7 - new Date(Date.UTC(y, m, 1)).getUTCDay()) % 7;
+      if (Date.UTC(y, m, d, 11, 30) > now.getTime()) return (m + 1) + "월 " + d + "일(일) 저녁 8시 30분";
+      m++; if (m > 11) { m = 0; y++; }
+    }
+    return "매월 첫째 주 일요일 저녁 8시 30분";
+  }
+  window.KAIA_NEXT_FREE = nextFreeClass;
+  function fillNextFree() { document.querySelectorAll(".js-next-free").forEach(function (el) { el.textContent = nextFreeClass(); }); }
+  fillNextFree(); document.addEventListener("DOMContentLoaded", fillNextFree);
+
   /* 페이지 주소(짧은 주소): tc 소속강사소개 · qa 강의 문의 · ai AI강사되기 · ss 유튜브 쇼핑쇼츠 · cs 1:1 컨설팅 · ar AI 자료실 */
   var MENU = [
     ["tc", "소속강사소개"],
@@ -173,9 +188,10 @@
     box.innerHTML =
       '<div class="fc-box"><button type="button" class="fc-x" aria-label="닫기">×</button>' +
       '<form class="fc-form" novalidate>' +
-      '<p class="fc-badge">매월 무료 · Zoom 실습</p>' +
+      '<p class="fc-badge">매월 첫째 주 일요일 저녁 8:30 · Zoom</p>' +
       '<h3 id="fc-t">매월 열리는 <em>최신 AI 실습 무료특강</em>에 초대해 드립니다</h3>' +
-      '<p class="fc-sub">이름과 연락처를 남겨 주시면 특강 일정이 정해질 때 문자·카톡, 이메일로 줌링크를 보내 드려요.</p>' +
+      '<p class="fc-when">다음 특강 <b>' + nextFreeClass() + '</b></p>' +
+      '<p class="fc-sub">이름과 연락처를 남겨 주시면 문자·카톡, 이메일로 줌링크를 보내 드려요.</p>' +
       '<label class="fc-f"><span>이름 <i>*</i></span><input name="이름" autocomplete="name" required></label>' +
       '<label class="fc-f"><span>전화번호 <i>*</i></span><input name="전화번호" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required></label>' +
       '<label class="fc-f"><span>이메일 <i>*</i></span><input name="이메일" type="email" inputmode="email" autocomplete="email" placeholder="example@naver.com" required></label>' +

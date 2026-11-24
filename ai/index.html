@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
 <link rel="manifest" href="../site.webmanifest">
 <meta name="theme-color" content="#0f2350">
-<link rel="stylesheet" href="../css/site.css?v=20261121d">
+<link rel="stylesheet" href="../css/site.css?v=20261125b">
 <style>
   /* ---------- 첫 화면 ---------- */
   .ai-hero { padding: 72px 0 84px; overflow: hidden; }
@@ -122,7 +122,8 @@
 
   /* ---------- 올인원 ---------- */
   .allin { background: linear-gradient(135deg, #0f2350, #1b3a7c); color: #e7ecf7; border-radius: 28px; padding: clamp(28px, 5vw, 52px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; position: relative; overflow: hidden; }
-  .allin::before { content: "BEST"; position: absolute; top: 22px; right: -38px; transform: rotate(35deg); background: var(--marker); color: var(--brand-deep); font-weight: 800; font-size: .8rem; letter-spacing: .1em; padding: 6px 48px; }
+  .allin::before { content: "★ BEST"; position: absolute; z-index: 2; top: 40px; right: -122px; width: 440px; text-align: center; transform: rotate(35deg); background: #ffd12a; color: #c0151b; font-family: "Arial Black", "Arial", "Noto Sans KR", sans-serif; font-weight: 900; font-size: 2rem; line-height: 1; letter-spacing: .06em; padding: 14px 0; box-shadow: 0 6px 18px rgba(0,0,0,.35); border-top: 3px solid #fff3b0; border-bottom: 3px solid #e0a800; }
+  @media (max-width: 700px) { .allin::before { top: 22px; right: -78px; width: 300px; font-size: 1.25rem; padding: 10px 0; } .allin > div:first-child { padding-top: 34px; } }
   .allin h2 { color: #fff; }
   .allin h2 span { background: linear-gradient(90deg, #ffd84d, #f5b301); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .allin .eyebrow { color: var(--marker); }
@@ -282,8 +283,8 @@
         <div class="why reveal" data-delay="1"><i>5</i><b>안정된 수익</b><p>정해진 시간과 강사료로 매달 예측 가능한 수입을 만들 수 있습니다.</p></div>
       </div>
       <div class="pay-calc">
-        <div class="calc reveal"><figure class="calc-ph"><img src="../img/class-group.webp" width="1100" height="774" alt="강사가 화면을 띄워 놓고 수강생들에게 AI 활용을 가르치는 소그룹 강의 모습" loading="lazy"></figure><div class="calc-body"><small>하루 3시간 근무 시</small><span class="eq">3시간 × 21일 × 33,000원</span><strong class="won-red">월 약 207만원</strong></div></div>
-        <div class="calc reveal" data-delay="1"><figure class="calc-ph"><img src="../img/class-adult.webp" width="1100" height="774" alt="컴퓨터 교실에서 성인 수강생들이 강사의 AI 강의를 듣는 모습" loading="lazy"></figure><div class="calc-body"><small>하루 6시간 근무 시</small><span class="eq">6시간 × 21일 × 33,000원</span><strong class="won-red">월 약 415만원</strong></div></div>
+        <div class="calc reveal"><figure class="calc-ph"><img src="../img/class-adult.webp" width="1100" height="774" alt="컴퓨터 교실에서 성인 수강생들이 강사의 AI 강의를 듣는 모습" loading="lazy"></figure><div class="calc-body"><small>하루 6시간 근무 시</small><span class="eq">6시간 × 21일 × 33,000원</span><strong class="won-red">월 약 415만원</strong></div></div>
+        <div class="calc reveal" data-delay="1"><figure class="calc-ph"><img src="../img/class-group.webp" width="1100" height="774" alt="강사가 화면을 띄워 놓고 수강생들에게 AI 활용을 가르치는 소그룹 강의 모습" loading="lazy"></figure><div class="calc-body"><small>하루 3시간 근무 시</small><span class="eq">3시간 × 21일 × 33,000원</span><strong class="won-red">월 약 207만원</strong></div></div>
         <p class="calc-note">※ 2025년 디지털배움터 파견강사 시급 33,000원 기준 예시입니다. 연도별 공고와 운영 기관에 따라 강사료와 근무 형태는 달라질 수 있습니다.</p>
       </div>
     </div>
@@ -345,7 +346,8 @@
           <ul>
             <li><span>최신 기출 분석<em>100만원 상당</em>25년도 지역별 면접시험 문제 제공</span></li>
             <li><span>실전 대비<br>면접 예상문제와 모범답안 제공</span></li>
-            <li><span>1:1 맞춤 코칭 60분<em>50만원 상당</em>이력서·면접 요령 강의 VOD(60분) 또는 Zoom 실시간</span></li>
+            <li><span>이력서·면접 요령 강의 VOD<br>60분 강의 영상 제공</span></li>
+            <li><span>1:1 맞춤 코칭 60분<em>50만원 상당</em>Zoom 실시간 이력서·면접 코칭</span></li>
           </ul>
           <div class="price"><del>정가 33만원</del><strong>20<small>만원</small></strong><span>무이자 5개월 시 월 4만원</span></div>
           <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/685871822" href="https://store.kakao.com/dreamlab/products/685871822" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
@@ -461,6 +463,6 @@
 
 <footer id="site-foot"></footer>
 <div id="dock"></div>
-<script src="../js/site.js?v=20261122a"></script>
+<script src="../js/site.js?v=20261125a"></script>
 </body>
 </html>
