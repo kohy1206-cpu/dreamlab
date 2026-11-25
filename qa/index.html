@@ -52,13 +52,14 @@
   .iq-visual .lamp { position: absolute; right: -7%; bottom: -1%; width: 25%; animation: bob 3.6s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(15,35,80,.25)); }
   .iq-visual .tag { position: absolute; background: #fff; border: 2px solid var(--brand); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: .78rem; box-shadow: 0 8px 18px rgba(15,35,80,.15); animation: bob 4s ease-in-out infinite; }
   .tag.t1 { left: 0; top: 10%; } .tag.t2 { right: 4%; top: 4%; animation-delay: .8s; border-color: #ff8fb1; } .tag.t3 { left: 4%; bottom: 9%; animation-delay: 1.6s; border-color: #4ff3d6; }
+  .tag.t4 { right: 18%; bottom: 16%; animation-delay: 2.4s; border-color: #ffc93c; z-index: 3; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   @media (prefers-reduced-motion: reduce) { .iq-visual * { animation: none !important; } }
   @media (max-width: 860px) { .iq-hero .wrap { grid-template-columns: 1fr; } .iq-visual { max-width: 340px; } }
 
   /* 대상 */
-  .targets { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .targets { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
   .target { background: var(--card); border-radius: 18px; padding: 24px 18px; text-align: center; box-shadow: 0 6px 16px rgba(15,35,80,.06); transition: transform .25s; }
   .target:hover { transform: translateY(-6px); }
   .target .ic { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 12px; display: grid; place-items: center; background: var(--blueprint); }
@@ -176,7 +177,7 @@
           <div class="dots" role="tablist" aria-label="사진 선택"><button type="button" class="on" aria-label="1번 사진"></button><button type="button" aria-label="2번 사진"></button><button type="button" aria-label="3번 사진"></button><button type="button" aria-label="4번 사진"></button><button type="button" aria-label="5번 사진"></button><button type="button" aria-label="6번 사진"></button></div>
         </div>
         <img class="lamp" src="../img/genie-lamp.webp" width="255" height="456" alt="" aria-hidden="true">
-        <span class="tag t1" aria-hidden="true">챗GPT 기초</span><span class="tag t2" aria-hidden="true">AX · AI 업무 자동화</span><span class="tag t3" aria-hidden="true">시니어 디지털</span>
+        <span class="tag t1" aria-hidden="true">챗GPT 기초</span><span class="tag t2" aria-hidden="true">AX · AI 업무 자동화</span><span class="tag t3" aria-hidden="true">시니어 디지털</span><span class="tag t4" aria-hidden="true">초중고 AI교육</span>
       </div>
     </div>
   </section>
@@ -190,7 +191,8 @@
         <div class="target reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></div><b>공공기관</b><span>공무원 · 직원 교육</span></div>
         <div class="target reveal" data-delay="2"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><b>디지털배움터</b><span>주민 디지털 교육</span></div>
         <div class="target reveal"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2.2 1.3-4 3-4.5"/></svg></div><b>복지관 · 시니어</b><span>눈높이 맞춤 수업</span></div>
-        <div class="target reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg></div><b>학교 · 방과후</b><span>청소년 AI 활용</span></div>
+        <div class="target reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg></div><b>초중고 창체</b><span>창의적 체험활동</span></div>
+        <div class="target reveal" data-delay="2"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><b>방과후 학교</b><span>청소년 AI 활용</span></div>
       </div>
     </div>
   </section>

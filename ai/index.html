@@ -26,7 +26,7 @@
 <style>
   /* ---------- 첫 화면 ---------- */
   .ai-hero { padding: 72px 0 84px; overflow: hidden; }
-  .ai-hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .ai-hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
   .ai-hero h1 { margin: 14px 0 20px; }
   .ai-hero h1 em { font-style: normal; color: var(--brand); }
   .ai-hero .lead { font-size: 1.08rem; color: var(--ink-soft); max-width: 31em; margin-bottom: 28px; }
@@ -34,20 +34,36 @@
   .hero-stats div { background: var(--card); border-radius: 14px; padding: 14px 18px; box-shadow: 0 6px 16px rgba(15,35,80,.07); }
   .hero-stats b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--brand); line-height: 1.1; }
   .hero-stats span { font-size: .78rem; color: var(--ink-soft); }
-  .stage { position: relative; aspect-ratio: 1; max-width: 440px; width: 100%; justify-self: center; }
+  .stage { position: relative; aspect-ratio: 1; max-width: 460px; width: 100%; justify-self: center; }
   .stage .halo { position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #fff 0 30%, transparent 31%), conic-gradient(from 0deg, #4ff3d6, #2350b0, #ff8fb1, #ffd84d, #4ff3d6); animation: spin 26s linear infinite; opacity: .9; }
   .stage .podium { position: absolute; left: 16%; right: 16%; bottom: 8%; height: 20%; background: var(--brand-deep); border-radius: 50% / 30%; box-shadow: 0 18px 30px rgba(15,35,80,.3); }
   .stage .board { position: absolute; left: 14%; right: 14%; top: 14%; bottom: 30%; background: #0f2350; border: 6px solid #fff; border-radius: 18px; color: #fff; display: grid; place-items: center; text-align: center; padding: 18px; box-shadow: 0 20px 40px rgba(15,35,80,.3); }
   .stage .board small { color: var(--marker); font-weight: 700; letter-spacing: .12em; font-size: .72rem; }
   .stage .board strong { display: block; font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.8rem); line-height: 1.35; margin-top: 4px; }
   .stage .board .won { color: var(--marker); }
-  .stage .lamp { position: absolute; right: -2%; bottom: 4%; width: 30%; animation: bob 3.6s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(15,35,80,.25)); }
+  .stage .lamp { position: absolute; right: -7%; bottom: -1%; width: 25%; z-index: 3; animation: bob 3.6s ease-in-out infinite; filter: drop-shadow(0 10px 16px rgba(15,35,80,.25)); }
   .stage .tag { position: absolute; background: #fff; border: 2px solid var(--brand); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: .78rem; box-shadow: 0 8px 18px rgba(15,35,80,.15); animation: bob 4s ease-in-out infinite; white-space: nowrap; }
-  .tag.t1 { left: -2%; top: 8%; } .tag.t2 { right: 0; top: 2%; animation-delay: .8s; border-color: #ff8fb1; } .tag.t3 { left: 0; bottom: 18%; animation-delay: 1.6s; border-color: #4ff3d6; }
+  .tag.t1 { left: 0; top: 10%; } .tag.t2 { right: 4%; top: 4%; animation-delay: .8s; border-color: #ff8fb1; } .tag.t3 { left: 4%; bottom: 9%; animation-delay: 1.6s; border-color: #4ff3d6; }
+  /* 강의 사진 슬라이드 (강의 문의 페이지와 같은 크기·동작) */
+  .stage .tag { z-index: 3; }
+  .stage .shots { position: absolute; inset: 17% 0 21% 0; margin: 0; border-radius: 18px; border: 6px solid #fff; box-shadow: 0 20px 40px rgba(15,35,80,.3); overflow: hidden; background: #0f2350; z-index: 2; }
+  .stage .slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .6s ease; }
+  .stage .slide.on { opacity: 1; }
+  .stage .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; transform: scale(1.06); transition: transform 3.4s ease-out; }
+  .stage .slide.on img { transform: scale(1); }
+  .stage .slide figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 14px 24px; background: linear-gradient(transparent, rgba(10,25,60,.85)); color: #fff; font-size: .74rem; font-weight: 700; letter-spacing: .02em; }
+  .stage .slide figcaption small { display: block; color: var(--marker); font-size: .66rem; letter-spacing: .12em; }
+  .stage .crew-pin { position: absolute; top: 10px; right: 10px; z-index: 2; background: rgba(15,35,80,.88); color: #fff; border-radius: 12px; padding: 6px 12px; font-size: .74rem; font-weight: 700; line-height: 1.3; text-align: right; }
+  .stage .crew-pin small { display: block; color: var(--marker); font-size: .62rem; letter-spacing: .1em; }
+  .stage .crew-pin b { color: var(--marker); font-size: 1.05rem; }
+  .stage .dots { position: absolute; left: 14px; bottom: 9px; display: flex; gap: 6px; z-index: 2; }
+  .stage .dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.55); cursor: pointer; transition: width .3s, background .3s; }
+  .stage .dots button.on { width: 22px; background: var(--marker); }
+  .tag.t4 { right: 18%; bottom: 16%; animation-delay: 2.4s; border-color: #ffc93c; z-index: 3; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   @media (prefers-reduced-motion: reduce) { .stage * { animation: none !important; } }
-  @media (max-width: 860px) { .ai-hero .wrap { grid-template-columns: 1fr; } .stage { max-width: 330px; } }
+  @media (max-width: 860px) { .ai-hero .wrap { grid-template-columns: 1fr; } .stage { max-width: 340px; } }
 
   /* ---------- 목표 ---------- */
   .goals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -223,14 +239,24 @@
           <div><b>무이자 5개월</b><span>카카오 스토어 결제</span></div>
         </div>
       </div>
-      <div class="stage reveal" aria-hidden="true">
-        <div class="halo"></div>
-        <div class="podium"></div>
-        <div class="board"><div><small>2026년 현재</small><span class="crew">자격증 발급 인원</span><strong class="crew-num"><b data-count="80">80</b>여 명</strong></div></div>
-        <span class="tag t1">왕초보 OK</span>
-        <span class="tag t2">경력단절 OK</span>
-        <span class="tag t3">60대 시니어 OK</span>
-        <img class="lamp" src="../img/genie-lamp.webp" width="400" height="400" alt="">
+      <div class="stage reveal">
+        <div class="halo" aria-hidden="true"></div>
+        <div class="podium" aria-hidden="true"></div>
+        <div class="shots" role="region" aria-roledescription="슬라이드" aria-label="강의 현장 사진">
+            <figure class="slide on"><img src="../img/class-hall.webp" width="1100" height="774" alt="대강당을 가득 채운 청중 앞에서 강사가 AI 활용 강의를 진행하는 모습"><figcaption><small>LECTURE</small>기업 · 기관 대상 AI 활용 강의</figcaption></figure>
+            <figure class="slide"><img src="../img/class-group.webp" width="1100" height="774" alt="회의실에서 노트북을 펼친 수강생들에게 강사가 화면을 가리키며 설명하는 소그룹 수업" loading="lazy"><figcaption><small>WORKSHOP</small>소그룹 AI 실습 수업</figcaption></figure>
+            <figure class="slide"><img src="../img/class-photo.webp" width="1100" height="774" alt="초등학교 교실에서 협회 강사가 'AI를 활용한 청소년 창업 프로젝트 나도 창업가' 수업을 진행하는 모습" loading="lazy"><figcaption><small>ON-SITE CLASS</small>AI를 활용한 청소년 창업 프로젝트</figcaption></figure>
+            <figure class="slide"><img src="../img/class-adult.webp" width="1100" height="774" alt="성인 수강생들이 노트북으로 실습하며 강사의 AI 초보탈출 강의를 듣는 모습" loading="lazy"><figcaption><small>ONE-DAY CLASS</small>하루 만에 AI 초보탈출 실습</figcaption></figure>
+            <figure class="slide"><img src="../img/class-teens.webp" width="1100" height="774" alt="컴퓨터실에서 학생들이 노트북으로 AI를 실습하고 강사가 화면 앞에서 설명하는 모습" loading="lazy"><figcaption><small>YOUTH CLASS</small>청소년 AI 활용 실습 수업</figcaption></figure>
+            <figure class="slide"><img src="../img/class-seniors.webp" width="1100" height="774" alt="시니어 수강생들이 AI로 만든 동화책과 수료증을 들고 강사와 함께 찍은 기념사진" loading="lazy"><figcaption><small>SENIOR CLASS</small>AI로 만든 동화책 · 시니어 수료식</figcaption></figure>
+          <p class="crew-pin"><small>2026년 현재</small>자격증 발급 <b>80</b>여 명</p>
+          <div class="dots" role="tablist" aria-label="사진 선택"><button type="button" class="on" aria-label="1번 사진"></button><button type="button" aria-label="2번 사진"></button><button type="button" aria-label="3번 사진"></button><button type="button" aria-label="4번 사진"></button><button type="button" aria-label="5번 사진"></button><button type="button" aria-label="6번 사진"></button></div>
+        </div>
+        <span class="tag t1" aria-hidden="true">왕초보 OK</span>
+        <span class="tag t2" aria-hidden="true">경력단절 OK</span>
+        <span class="tag t3" aria-hidden="true">60대 시니어 OK</span>
+        <span class="tag t4" aria-hidden="true">초중고 AI교육</span>
+        <img class="lamp" src="../img/genie-lamp.webp" width="400" height="400" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
@@ -259,7 +285,7 @@
         <p>돈을 벌면서 준비하고, 동시에 나를 알리고, 미래 먹거리까지 만듭니다.</p>
       </div>
       <div class="road">
-        <div class="lv reveal"><span>1단계 · 초단기</span><b>돈 벌면서 준비하기</b><p>디지털배움터 강사로 시작해 강의 경력과 안정된 수입을 동시에 만듭니다.</p></div>
+        <div class="lv reveal"><span>1단계 · 초단기</span><b>돈 벌면서 준비하기</b><p>디지털배움터, 초중고 창의적 체험활동(창체) 교육강사, 방과후 강사로 시작해 강의 경력과 안정된 수입을 동시에 만듭니다.</p></div>
         <div class="lv reveal" data-delay="1"><span>2단계 · 중기</span><b>온라인 건물주 되기</b><p>유튜브·블로그·인스타 등 SNS로 나를 브랜딩하고 잠재 고객을 모읍니다.</p></div>
         <div class="lv reveal" data-delay="2"><span>3단계 · 장기</span><b>미래 먹거리 만들기</b><p>무료특강 → 모집 → 개강의 흐름을 만들어 강사로 오래 살아남습니다.</p></div>
       </div>
@@ -318,7 +344,7 @@
         <article class="course reveal">
           <span class="lvl">입문 · 총 4회</span>
           <h3>AI활용지도사 2급</h3>
-          <p class="sum">핵심 이론부터 실무 기초까지 탄탄하게 다집니다.</p>
+          <p class="sum">최신 기초 핵심 이론부터 실무 기초까지 탄탄하게 다집니다.</p>
           <ul>
             <li><span>실전 자료팩 제공<em>100만원 상당</em>디지털배움터 '23~'24 강의 교안(초·중·심화)과 각종 전자책</span></li>
             <li><span>2급 자격증 무료 발급<em>10만원 상당</em>한국AI활용지도사교육연구협회 발급(PDF)</span></li>
@@ -330,11 +356,11 @@
         <article class="course reveal" data-delay="1">
           <span class="lvl">심화 · 총 4회</span>
           <h3>AI활용지도사 1급</h3>
-          <p class="sum">심화 이론과 실무를 마스터하고 면접까지 대비합니다.</p>
+          <p class="sum">최신 심화 이론과 실무를 마스터합니다.</p>
           <ul>
             <li><span>실전 자료팩 제공<em>100만원 상당</em>디지털배움터 '23~'24 강의 교안(초·중·심화)과 각종 전자책</span></li>
             <li><span>1급 자격증 무료 발급<em>15만원 상당</em>한국AI활용지도사교육연구협회 발급(PDF)</span></li>
-            <li><span>시크릿 팁 &amp; Q&amp;A 1년 회원권<em>39.6만원 상당</em>실시간 질의응답, 실무 노하우와 면접 정보 공유</span></li>
+            <li><span>시크릿 팁 · Q&amp;A 1년 회원권<em>39.6만원 상당</em>실시간 질의응답, 실무 노하우와 면접 정보 공유</span></li>
           </ul>
           <div class="price"><del>정가 66만원</del><strong>44<small>만원</small></strong><span>무이자 5개월 시 월 8.8만원</span></div>
           <a class="btn btn-primary js-store" data-store="https://store.kakao.com/dreamlab/products/689024641" href="https://store.kakao.com/dreamlab/products/689024641" target="_blank" rel="noopener">카카오 스토어에서 신청</a>
@@ -441,9 +467,9 @@
       </div>
       <div class="faq">
         <details class="reveal"><summary>강의 경험이 전혀 없어도 되나요?</summary><p>네. 디지털배움터는 처음 지원하는 강사를 우대하고, 수강생도 왕초보 어르신이 많습니다. 검증된 교안을 드리기 때문에 ‘전달’에만 집중하시면 됩니다.</p></details>
-        <details class="reveal"><summary>컴퓨터를 잘 못 다루는데 따라갈 수 있을까요?</summary><p>60대 챗맹도 시작할 수 있도록 기초부터 진행합니다. 수업 녹화본 영상이 제공되어 놓친 부분은 다시 보며 복습할 수 있습니다.</p></details>
-        <details class="reveal"><summary>2급과 1급은 어떻게 다른가요?</summary><p>2급은 핵심 이론과 실무 기초, 1급은 심화 이론과 실무 마스터, 면접 대비까지 다룹니다. 1급에는 시크릿 팁 &amp; Q&amp;A 1년 회원권이 함께 제공됩니다.</p></details>
-        <details class="reveal"><summary>결제는 어떻게 하나요?</summary><p>카카오 스토어에서 카드로 결제하며 무이자 할부(3·5개월)가 가능합니다. 현금 결제를 원하시면 문자로 문의해 주세요.</p></details>
+        <details class="reveal"><summary>컴퓨터를 잘 못 다루는데 따라갈 수 있을까요?</summary><p>60대 챗맹도 시작할 수 있도록 기초부터 진행합니다. 수업 녹화본 영상이 제공되어 놓친 부분은 다시 보며 복습할 수 있습니다. 컴퓨터는 말로만 설명하면 따라 하기 어렵기 때문에, 60대를 위한 질문방에 질문을 올리시면 바로 영상을 찍어서 알려 드립니다. 그래도 어려우시면 특별히 원격으로 직접 화면을 보며 도와 드립니다.</p></details>
+        <details class="reveal"><summary>2급과 1급은 어떻게 다른가요?</summary><p>2급은 핵심 이론과 실무 기초, 1급은 심화 이론과 실무 마스터를 다룹니다. 1급에는 시크릿 팁 · Q&amp;A 1년 회원권이 함께 제공됩니다.</p></details>
+        <details class="reveal"><summary>결제는 어떻게 하나요?</summary><p>카카오 스토어에서 카드로 결제하며 무이자 할부(3·5개월)가 가능합니다. 현금 결제를 원하시면 문자로 문의해 주세요. 현금 결제는 회사 통장으로 입금하시며, 현금영수증 발급도 가능합니다.</p></details>
       </div>
     </div>
   </section>
@@ -464,5 +490,18 @@
 <footer id="site-foot"></footer>
 <div id="dock"></div>
 <script src="../js/site.js?v=20261125a"></script>
+<script>
+/* 강의 사진 슬라이드: 3초마다 다음 사진, 점을 누르면 해당 사진 */
+(function () {
+  var box = document.querySelector(".stage .shots"); if (!box) return;
+  var slides = box.querySelectorAll(".slide"), dots = box.querySelectorAll(".dots button"), i = 0, t;
+  function show(n) { slides[i].classList.remove("on"); dots[i].classList.remove("on"); i = (n + slides.length) % slides.length; slides[i].classList.add("on"); dots[i].classList.add("on"); }
+  function play() { clearInterval(t); t = setInterval(function () { show(i + 1); }, 3000); }
+  dots.forEach(function (d, n) { d.addEventListener("click", function () { show(n); play(); }); });
+  box.addEventListener("mouseenter", function () { clearInterval(t); });
+  box.addEventListener("mouseleave", play);
+  play();
+})();
+</script>
 </body>
 </html>

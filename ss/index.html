@@ -98,6 +98,15 @@
   .bar .fill { height: 100%; border-radius: 8px; display: flex; align-items: center; padding: 0 12px; font-weight: 800; white-space: nowrap; transform-origin: left; transition: transform 1.2s ease; }
   .bar.b1 .fill { width: 100%; background: #5a6a92; } .bar.b2 .fill { width: 10%; min-width: 120px; background: var(--marker); color: var(--brand-deep); }
   .motion .bars:not(.in) .fill { transform: scaleX(0); }
+  .watch { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); }
+  .watch h4 { color: #fff; font-size: 1rem; margin: 0 0 12px; }
+  .watch h4 small { font-size: .78rem; color: #9fb0d6; font-weight: 600; margin-left: 6px; }
+  .watch .opt { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; font-size: .86rem; margin-bottom: 10px; }
+  .watch .opt b { display: flex; align-items: center; height: 34px; padding: 0 12px; border-radius: 8px; background: rgba(255,255,255,.1); color: #fff; font-weight: 800; }
+  .watch .opt b em { font-style: normal; color: var(--marker); margin-right: 4px; }
+  .watch .or { font-size: .74rem; color: #9fb0d6; margin: -4px 0 6px 122px; }
+  .watch .plus { margin-top: 8px; font-size: .82rem; color: #c9d3ea; }
+  @media (max-width: 520px) { .watch .opt { grid-template-columns: 1fr; gap: 6px; } .watch .or { margin-left: 0; } }
   .drop .src { margin-top: 16px; font-size: .74rem; color: #9fb0d6; }
   .drop .src a { color: #c9d3ea; }
   .no-need { background: var(--card); border-radius: 22px; padding: 30px; display: grid; gap: 14px; align-content: center; }
@@ -295,6 +304,13 @@
           <div class="bars on-view">
             <div class="bar b1"><span>예전</span><div class="track"><div class="fill">구독자 1만 명</div></div></div>
             <div class="bar b2"><span>2026년 3월~</span><div class="track"><div class="fill">500명</div></div></div>
+          </div>
+          <div class="watch">
+            <h4>시청시간 기준<small>아래 둘 중 하나</small></h4>
+            <div class="opt"><span>긴 영상</span><b><em>3,000시간</em>최근 12개월 공개 시청시간</b></div>
+            <p class="or">또는</p>
+            <div class="opt"><span>쇼츠</span><b><em>300만 회</em>최근 90일 쇼츠 조회수</b></div>
+            <p class="plus">+ 최근 90일 동안 공개 영상 3개 이상 업로드</p>
           </div>
           <p class="src">※ 2026년 3월 30일 유튜브 발표 기준 · 유튜브 파트너 프로그램(YPP) 가입 요건 충족 필요 · 정책은 바뀔 수 있습니다. (<a href="https://www.khan.co.kr/article/202604051625001" target="_blank" rel="noopener">관련 기사</a>)</p>
         </div>
