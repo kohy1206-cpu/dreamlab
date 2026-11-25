@@ -136,12 +136,18 @@
   .type h3 { font-size: 1.2rem; }
   .type .one { font-size: .88rem; color: var(--ink-soft); }
   .meter { display: grid; gap: 6px; font-size: .78rem; margin-top: 4px; }
-  .meter div { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: center; }
+  .meter div { display: grid; grid-template-columns: 88px 1fr; gap: 8px; align-items: center; white-space: nowrap; }
   .meter i { display: block; height: 8px; border-radius: 99px; background: #e8ecf3; overflow: hidden; position: relative; }
   .meter i::after { content: ""; position: absolute; inset: 0; width: var(--v); border-radius: 99px; background: var(--c, var(--brand)); }
   .type .tag { margin-top: auto; font-size: .78rem; font-weight: 700; padding: 6px 10px; border-radius: 10px; background: var(--blueprint); color: var(--brand-deep); }
   .type.t3 .tag { background: #ffe8e6; color: #b3170f; }
   .type.t2 .tag { background: #fff4d1; color: #7a5900; }
+  /* 네 카드의 줄(유형·제목·설명·막대·태그) 높이를 서로 맞춤 */
+  @supports (grid-template-rows: subgrid) {
+    .type { display: grid; grid-template-rows: subgrid; grid-row: span 5; align-content: start; }
+    .type .meter { align-self: start; }
+    .type .tag { align-self: end; }
+  }
   .type-note { margin-top: 18px; font-size: .84rem; color: var(--ink-soft); }
   @media (max-width: 1000px) { .types { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .types { grid-template-columns: 1fr; } }
