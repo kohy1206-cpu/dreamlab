@@ -88,14 +88,20 @@
   @media (max-width: 760px) { .road { grid-template-columns: 1fr; gap: 12px; } .road .lv { min-height: 0 !important; border-bottom: 2px solid; border-radius: 18px; border-color: inherit; } .road .lv:nth-child(1) { border-bottom-color: var(--brand); } .road .lv:nth-child(2) { border-bottom-color: #ff8fb1; } .road .lv:nth-child(3) { border-bottom-color: #20bfa3; } .road-base { display: none; } }
 
   /* ---------- 디지털배움터 ---------- */
-  /* 디지털배움터 소개 영상 (페이지 안에서 바로 재생) */
-  .dg-video { margin: 0 auto 34px; max-width: 820px; }
-  .dg-video .play { position: relative; display: block; border-radius: 14px; }
-  .dg-video img { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 14px 30px rgba(15,35,80,.18); }
+  /* 디지털배움터란? 영상: 화면에 보이면 소리 없이 자동 재생, 멈추면 썸네일 */
+  .dg-video { margin: 0 auto 64px; max-width: 820px; }
+  .dg-video .shell { position: relative; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 14px 30px rgba(15,35,80,.18); }
+  .dg-video .shell iframe, .dg-video .shell #dg-player { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .dg-video .cover { position: absolute; inset: 0; z-index: 2; padding: 0; border: 0; cursor: pointer; background: #000; transition: opacity .35s; }
+  .dg-video .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dg-video .cover.off { opacity: 0; pointer-events: none; }
   .dg-video .play-btn { position: absolute; left: 50%; top: 50%; width: 76px; height: 54px; margin: -27px 0 0 -38px; background: #e00; border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,.3); transition: transform .2s; }
   .dg-video .play-btn::after { content: ""; position: absolute; left: 30px; top: 15px; border-left: 22px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
-  .dg-video .play:hover .play-btn { transform: scale(1.1); }
+  .dg-video .cover:hover .play-btn { transform: scale(1.1); }
+  .dg-video .sound { position: absolute; left: 12px; bottom: 54px; z-index: 3; display: none; align-items: center; gap: 6px; padding: 8px 14px; border: 0; border-radius: 999px; background: rgba(255,255,255,.95); color: var(--brand-deep); font: inherit; font-weight: 800; font-size: .86rem; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+  .dg-video .sound.on { display: inline-flex; }
   .dg-video figcaption { margin-top: 10px; font-size: .8rem; color: var(--ink-soft); text-align: center; }
+  .sub-head { margin-top: 0; }
   .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
   .why { background: var(--card); border-radius: 16px; padding: 22px 18px; box-shadow: 0 6px 16px rgba(15,35,80,.06); }
   .why i { font-style: normal; font-family: var(--font-display); font-weight: 800; color: #fff; background: var(--brand); border-radius: 50%; width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 12px; }
@@ -307,10 +313,21 @@
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow">1단계 · 디지털배움터</p>
-        <h2>디지털배움터가 <span class="mark">초보 강사에게 최적</span>인 이유</h2>
-        <p>디지털배움터는 국민 누구나 가까운 곳에서 디지털 교육을 받을 수 있도록 정부가 운영하는 사업입니다. 강의 경험이 없는 분께 가장 좋은 첫 무대입니다.</p>
+        <h2>디지털배움터란?</h2>
+        <p>디지털배움터는 국민 누구나 가까운 곳에서 디지털 교육을 받을 수 있도록 정부가 운영하는 사업입니다. 1분 30초 영상으로 먼저 확인해 보세요.</p>
       </div>
-      <figure class="dg-video reveal"><a class="play" href="https://youtu.be/PVoYtyzbjJg" aria-label="디지털배움터란? 소개 영상 보기 (유튜브)" target="_blank" rel="noopener"><img src="../img/dg-video.jpg" width="1280" height="720" alt="디지털배움터란? 정부 지원 사업 소개 영상 첫 화면" loading="lazy"><span class="play-btn" aria-hidden="true"></span></a><figcaption>사진을 누르면 바로 재생돼요 · <a class="yt-out" href="https://youtu.be/PVoYtyzbjJg" target="_blank" rel="noopener">유튜브에서 보기 ↗</a></figcaption></figure>
+      <figure class="dg-video reveal" data-ytid="PVoYtyzbjJg">
+        <div class="shell">
+          <div id="dg-player"></div>
+          <button type="button" class="cover" aria-label="디지털배움터란? 영상 재생"><img src="https://i.ytimg.com/vi/PVoYtyzbjJg/maxresdefault.jpg" data-alt="https://i.ytimg.com/vi/PVoYtyzbjJg/hqdefault.jpg" data-local="../img/dg-video.jpg" width="1280" height="720" alt="디지털배움터 AI 강사 시간당 33,000원 — 1분 30초 총정리 영상 썸네일" loading="lazy"><span class="play-btn" aria-hidden="true"></span></button>
+          <button type="button" class="sound">🔊 소리 켜기</button>
+        </div>
+        <figcaption>화면에 보이면 소리 없이 자동 재생돼요 · <a class="yt-out" href="https://youtu.be/PVoYtyzbjJg" target="_blank" rel="noopener">유튜브에서 보기 ↗</a></figcaption>
+      </figure>
+      <div class="section-head sub-head reveal">
+        <h2>디지털배움터가 <span class="mark">초보 강사에게 최적</span>인 이유</h2>
+        <p>강의 경험이 없는 분께 가장 좋은 첫 무대입니다.</p>
+      </div>
       <div class="why-grid">
         <div class="why reveal"><i>1</i><b>수강생이 왕초보</b><p>“구글 아이디가 뭐예요?” 사진 전송부터 배우는 분들이라 기초부터 차근차근 가르치면 됩니다.</p></div>
         <div class="why reveal" data-delay="1"><i>2</i><b>처음 지원하는 강사 우대</b><p>일자리 창출이 목적인 정부 사업이라 디지털배움터가 처음인 분이 우선순위입니다.</p></div>
@@ -500,6 +517,52 @@
 <footer id="site-foot"></footer>
 <div id="dock"></div>
 <script src="../js/site.js?v=20261125a"></script>
+<script>
+/* 디지털배움터란? 영상: 화면에 보이면 소리 없이 자동 재생 → 멈추거나 끝나면 썸네일 표시 */
+(function () {
+  var box = document.querySelector(".dg-video"); if (!box) return;
+  var id = box.getAttribute("data-ytid"), cover = box.querySelector(".cover"), img = cover.querySelector("img"), snd = box.querySelector(".sound");
+  var player = null, ready = false, wantPlay = false, byScroll = false, apiFail = false;
+  /* 썸네일: 유튜브 큰 썸네일 → 없으면 보통 썸네일 → 그래도 안 되면 홈페이지 안 사진 */
+  img.addEventListener("error", function () { var n = img.getAttribute("data-alt"); if (n) { img.removeAttribute("data-alt"); img.src = n; } else if (img.getAttribute("data-local")) { img.src = img.getAttribute("data-local"); img.removeAttribute("data-local"); } });
+  img.addEventListener("load", function () { if (img.naturalWidth && img.naturalWidth <= 120) img.dispatchEvent(new Event("error")); });
+  function showCover(on) { cover.classList.toggle("off", !on); if (on) snd.classList.remove("on"); }
+  function syncSound() { if (player && player.isMuted && player.isMuted()) snd.classList.add("on"); else snd.classList.remove("on"); }
+  function make() {
+    if (player || !window.YT || !YT.Player) return;
+    player = new YT.Player("dg-player", { videoId: id, playerVars: { autoplay: 0, mute: 1, playsinline: 1, rel: 0, modestbranding: 1 },
+      events: {
+        onReady: function () { ready = true; player.mute(); if (wantPlay) player.playVideo(); },
+        onStateChange: function (e) {
+          if (e.data === 1) { showCover(false); syncSound(); }
+          else if (e.data === 2 || e.data === 0) { showCover(true); }
+        }
+      } });
+  }
+  window.onYouTubeIframeAPIReady = (function (prev) { return function () { if (prev) prev(); make(); }; })(window.onYouTubeIframeAPIReady);
+  var tag = document.createElement("script"); tag.src = "https://www.youtube.com/iframe_api"; tag.onerror = function () { apiFail = true; }; document.head.appendChild(tag);
+  setTimeout(function () { if (!window.YT || !YT.Player) apiFail = true; }, 8000);
+  /* API를 못 쓰는 환경: 누르면 예전처럼 바로 재생 */
+  function fallback() { box.querySelector(".shell").innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="디지털배움터란? 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'; }
+  cover.addEventListener("click", function () {
+    if (ready) { player.unMute(); player.setVolume(80); player.playVideo(); showCover(false); syncSound(); }
+    else if (apiFail || !window.IntersectionObserver) fallback();
+    else { wantPlay = true; make(); }
+  });
+  snd.addEventListener("click", function () { if (!ready) return; player.unMute(); player.setVolume(80); snd.classList.remove("on"); });
+  /* 화면에 절반 이상 보이면 자동 재생, 벗어나면 잠시 멈춤 */
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting && en.intersectionRatio >= .5) {
+          if (!player) { wantPlay = true; make(); }
+          else if (ready && (byScroll || player.getPlayerState() === -1 || player.getPlayerState() === 5)) { byScroll = false; player.playVideo(); }
+        } else if (ready && player.getPlayerState() === 1) { byScroll = true; player.pauseVideo(); }
+      });
+    }, { threshold: [0, .5] }).observe(box.querySelector(".shell"));
+  }
+})();
+</script>
 <script>
 /* 강의 사진 슬라이드: 3초마다 다음 사진, 점을 누르면 해당 사진 */
 (function () {
